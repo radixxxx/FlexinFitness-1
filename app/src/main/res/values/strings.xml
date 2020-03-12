@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FlexinFitness</string>
+    <string name="name">name</string>
+    <string name="email">email</string>
+</resources>

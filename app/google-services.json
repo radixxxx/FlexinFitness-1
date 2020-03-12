@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "21679785727",
+    "firebase_url": "https://flexinfitness.firebaseio.com",
+    "project_id": "flexinfitness",
+    "storage_bucket": "flexinfitness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21679785727:android:edd75de090b684866c2eca",
+        "android_client_info": {
+          "package_name": "com.example.flexinfitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21679785727-g5pnlej17huuh6mpcoopc1u46vo5phe4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flexinfitness",
+            "certificate_hash": "ccbfde86eb3a407493cd8879fc2ddd248e6a38e5"
+          }
+        },
+        {
+          "client_id": "21679785727-2kbbt3da64o2e07s2dv2328ifpfoo6fj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTJHfdX_8vxZatLojr9-ls5oNbEnKes5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21679785727-2kbbt3da64o2e07s2dv2328ifpfoo6fj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
