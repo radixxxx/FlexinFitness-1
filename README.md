@@ -1,2 +1,2 @@
-# Project bitch Esteban Monmtelongo
-Project co-bitch Franco Alavero
+# Project Leader Esteban Montelongo
+Project Co-Leader Franco Alavero

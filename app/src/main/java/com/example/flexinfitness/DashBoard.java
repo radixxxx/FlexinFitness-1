@@ -33,13 +33,11 @@ public class DashBoard extends AppCompatActivity {
 
         logOut = findViewById(R.id.logOutButton);
         name = findViewById(R.id.nameTextView);
-        email = findViewById(R.id.emailTextView);
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signInAccount != null){
             // Retrieves user info to display.
             name.setText(signInAccount.getDisplayName());
-            email.setText(signInAccount.getEmail());
 
             // Listens for a click on the sign out button.
             logOut.setOnClickListener(new View.OnClickListener() {
@@ -59,14 +57,14 @@ public class DashBoard extends AppCompatActivity {
                     signInClient.signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(DashBoard.this, signInAccount.getEmail() + "Logged out Successfull!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DashBoard.this, signInAccount.getEmail() + " Logged out Successfull!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(DashBoard.this, signInAccount.getEmail()+ "Failed to log out!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DashBoard.this, signInAccount.getEmail()+ " Failed to log out!", Toast.LENGTH_SHORT).show();
 
                         }
 
