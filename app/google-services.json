@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "21679785727-lmo4utv2c6thssolvne32drrn4shkknr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flexinfitness",
+            "certificate_hash": "cf741a5797af8bc8c0ede3274c0faf8250e10dbd"
+          }
+        },
+        {
           "client_id": "21679785727-g5pnlej17huuh6mpcoopc1u46vo5phe4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
