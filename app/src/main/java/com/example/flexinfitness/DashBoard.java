@@ -57,14 +57,14 @@ public class DashBoard extends AppCompatActivity {
                     signInClient.signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(DashBoard.this, signInAccount.getEmail() + "Logged out Successfull!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DashBoard.this, signInAccount.getEmail() + " Logged out Successfull!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(DashBoard.this, signInAccount.getEmail()+ "Failed to log out!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DashBoard.this, signInAccount.getEmail()+ " Failed to log out!", Toast.LENGTH_SHORT).show();
 
                         }
 
