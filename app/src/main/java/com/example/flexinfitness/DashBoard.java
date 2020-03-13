@@ -33,13 +33,11 @@ public class DashBoard extends AppCompatActivity {
 
         logOut = findViewById(R.id.logOutButton);
         name = findViewById(R.id.nameTextView);
-        email = findViewById(R.id.emailTextView);
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signInAccount != null){
             // Retrieves user info to display.
             name.setText(signInAccount.getDisplayName());
-            email.setText(signInAccount.getEmail());
 
             // Listens for a click on the sign out button.
             logOut.setOnClickListener(new View.OnClickListener() {
