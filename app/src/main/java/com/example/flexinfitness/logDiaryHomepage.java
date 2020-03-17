@@ -10,6 +10,10 @@ public class logDiaryHomepage extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+
+
+        //Test
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_diary_homepage);
     }
