@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class DashBoard extends AppCompatActivity {
 
     Button logOut;
-    Button diary;
+    Button log;
     TextView name;
     TextView email;
 
@@ -33,7 +33,7 @@ public class DashBoard extends AppCompatActivity {
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         logOut = findViewById(R.id.logOutButton);
-        diary = findViewById(R.id.diaryButton);
+        log = findViewById(R.id.diaryButton);
         name = findViewById(R.id.nameTextView);
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
@@ -82,13 +82,13 @@ public class DashBoard extends AppCompatActivity {
         }
 
         // goes to the LOG/DIARY homepage upon clicking the button in the dashboard ================
-        diary.setOnClickListener(new View.OnClickListener()
+        log.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), logDiaryHomepage.class);
-                startActivity(gotoLOGDIARYHOMEPAGE);
+                Intent gotoLogHomepage = new Intent(getApplicationContext(), logHomepage.class);
+                startActivity(gotoLogHomepage);
             }
         });
         // end LOG/DIARY button onClick ============================================================
