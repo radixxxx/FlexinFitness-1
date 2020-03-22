@@ -27,6 +27,9 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     TextView rightDurationTextView;
     TextView rightBodyWeightTextView;
 
+    LinearLayout rightLinearLayout;
+    LinearLayout editTextLinearyLayout;
+
     // start onCreate() ============================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,6 +57,9 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         rightDurationTextView.setOnClickListener(this);
         rightBodyWeightTextView.setOnClickListener(this);
 
+        rightLinearLayout = findViewById(R.id.rightLinearLayout);
+        editTextLinearyLayout = findViewById(R.id.editTextLinearLayout);
+
     } // end onCreate() ============================================================================
 
     // start onClick() =============================================================================
@@ -63,28 +69,20 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         switch(v.getId())
         {
             case R.id.rightWorkoutNameTextView:
-                changeVisibility(rightWorkoutNameTextView, workoutNameEditText);
+                rightLinearLayout.setVisibility(View.GONE);
+                editTextLinearyLayout.setVisibility(View.VISIBLE);
+
+
                 String str_workoutName = getEditText(workoutNameEditText);
                 rightWorkoutNameTextView.setText(str_workoutName);
-                changeVisibility(rightWorkoutNameTextView, workoutNameEditText);
+
+                rightWorkoutNameTextView.setVisibility(View.VISIBLE);
+               // workoutNameEditText.setVisibility(View.GONE);
                 break;
         }
     } // end onClick() =============================================================================
 
-    // start changeVisibility() ====================================================================
-    public void changeVisibility(TextView txtV, EditText edTxt)
-    {
-        if( txtV.getVisibility() == View.VISIBLE)
-        {
-            txtV.setVisibility(View.GONE);
-            edTxt.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            txtV.setVisibility(View.VISIBLE);
-            edTxt.setVisibility(View.GONE);
-        }
-    } // end changeVisibility() ====================================================================
+
 
     // start getEditText() =========================================================================
     public String getEditText(EditText edTxt) { return edTxt.getText().toString(); }
