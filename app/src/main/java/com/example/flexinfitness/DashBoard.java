@@ -87,7 +87,7 @@ public class DashBoard extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), logDiaryHomepage.class);
+                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), logHomepage.class);
                 startActivity(gotoLOGDIARYHOMEPAGE);
             }
         });

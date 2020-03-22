@@ -4,16 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-//start logDiaryHomepage class =====================================================================
-public class logDiaryHomepage extends AppCompatActivity implements View.OnClickListener
+//start logHomepage class =====================================================================
+public class logHomepage extends AppCompatActivity implements View.OnClickListener
 {
     // Declare View & ViewGroup variables
     Button addLogButton;
@@ -80,7 +78,7 @@ public class logDiaryHomepage extends AppCompatActivity implements View.OnClickL
             public void onClick(View view)
             {
                 // declare edit text
-                EditText logEntryName = new EditText(logDiaryHomepage.this);
+                EditText logEntryName = new EditText(logHomepage.this);
 
                 // set properties of edit text
                 int ID = 0;
@@ -89,13 +87,12 @@ public class logDiaryHomepage extends AppCompatActivity implements View.OnClickL
                 ConstraintLayout.LayoutParams clp_logEntryName = new ConstraintLayout.LayoutParams
                         (ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
                 logEntryName.setLayoutParams(clp_logEntryName);
+
+                // add 'logEntryName' EditText View to c_constraintLayout
+                // logEntryName is a child of c_constraintLayout
                 c_constraintLayout.addView(logEntryName);
 
-                //logEntryName.setHint("ENTER WORKOUT NAME");
-               // logEntryName.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT));
-
-                // add constraints to the log entry name so that it's just in the middle
-                // c_constraintLayout is the root ViewGroup so I'm centering it in there
+                // setting constraints on 'logEntryName' EditText View
                 ConstraintSet constraintSet = new ConstraintSet();
                 constraintSet.clone(c_constraintLayout);
 
