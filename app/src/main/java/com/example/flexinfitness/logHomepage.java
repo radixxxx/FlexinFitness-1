@@ -31,9 +31,9 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_log_diary_homepage);
 
         // Connect View & ViewGroup variables to their XML id's
-        c_constraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
-        l_linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
-        addLogButton = (Button) findViewById(R.id.buttonADDLOG);
+        c_constraintLayout = findViewById(R.id.constraintLayout);
+        l_linearLayout = findViewById(R.id.linearLayout);
+        addLogButton = findViewById(R.id.buttonADDLOG);
         addLogButton.setOnClickListener(this);
 
     } // end onCreate() ============================================================================
