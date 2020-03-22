@@ -50,7 +50,6 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
                 createdLogEntry.setOnClickListener(getOnClickDoSomething(createdLogEntry));
                 break;
         } // end switch(view.getId()
-
     } // end onClick() =============================================================================
 
     // start createLogEntry() ======================================================================
@@ -103,6 +102,4 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
             }
         };
     } // end getOnClickDoSomething() ===============================================================
-
-
 } // end logDiaryHomepage class ====================================================================
