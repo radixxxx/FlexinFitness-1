@@ -69,20 +69,17 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         switch(v.getId())
         {
             case R.id.rightWorkoutNameTextView:
+            case R.id.rightDateTextView:
+            case R.id.rightStartTimeTextView:
+            case R.id.rightDurationTextView:
+            case R.id.rightBodyWeightTextView:
+                // if they click on anyone of the TextViews
+                // hide TextViews and expose the EditTexts'
                 rightLinearLayout.setVisibility(View.GONE);
                 editTextLinearyLayout.setVisibility(View.VISIBLE);
-
-
-                String str_workoutName = getEditText(workoutNameEditText);
-                rightWorkoutNameTextView.setText(str_workoutName);
-
-                rightWorkoutNameTextView.setVisibility(View.VISIBLE);
-               // workoutNameEditText.setVisibility(View.GONE);
                 break;
         }
     } // end onClick() =============================================================================
-
-
 
     // start getEditText() =========================================================================
     public String getEditText(EditText edTxt) { return edTxt.getText().toString(); }
