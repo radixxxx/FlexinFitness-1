@@ -32,6 +32,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     LinearLayout editTextLinearyLayout;
 
     Button submitValuesButton;
+    Button doneButton;
 
     // start onCreate() ============================================================================
     @Override
@@ -53,6 +54,9 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         rightDurationTextView = findViewById(R.id.rightDurationTextView);
         rightBodyWeightTextView = findViewById(R.id.rightBodyWeightTextView);
 
+        submitValuesButton = findViewById(R.id.submitValuesButton);
+        doneButton = findViewById(R.id.doneButton);
+
         // set the 'TextViews' onClick's
         rightWorkoutNameTextView.setOnClickListener(this);
         rightDateTextView.setOnClickListener(this);
@@ -60,10 +64,9 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         rightDurationTextView.setOnClickListener(this);
         rightBodyWeightTextView.setOnClickListener(this);
 
+        // set the layout's onClick's
         rightLinearLayout = findViewById(R.id.rightLinearLayout);
         editTextLinearyLayout = findViewById(R.id.editTextLinearLayout);
-
-        submitValuesButton = findViewById(R.id.submitValuesButton);
 
     } // end onCreate() ============================================================================
 
