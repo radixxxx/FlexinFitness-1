@@ -7,11 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class logDiaryHomepage extends AppCompatActivity
+public class logDiaryHomepage extends AppCompatActivity implements View.OnClickListener
 {
     // Declare view variables
-    Button b_addLog;
+    Button addLogButton;
     LinearLayout l_linearLayout;
+
+    // Static Identifier counter
+    static int ID = 0;
 
 
     @Override
@@ -20,26 +23,28 @@ public class logDiaryHomepage extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_diary_homepage);
 
-        // Assign the views from the layout file to the view variables
-        b_addLog = (Button) findViewById(R.id.buttonADDLOG);
+        // Connect the view variables to XML id's
         l_linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        addLogButton = (Button) findViewById(R.id.buttonADDLOG);
+        addLogButton.setOnClickListener(this);
 
-        // Setting the OnClickListener within 'onCreate' method
-        b_addLog.setOnClickListener(new View.OnClickListener()
+    } // end onCreate
+
+
+    @Override
+    public void onClick(View view)
+    {
+        switch(view.getId())
         {
-            @Override
-            public void onClick(View v)
-            {
-                //Create a new button
-                Button b_logEntry1;
-                b_logEntry1 = new Button(logDiaryHomepage.this);
-
-                //Set properties
-                int ENTRY_1 = 1;
-                b_logEntry1.setText("ENTRY 1");
-                b_logEntry1.setId(ENTRY_1);
-                l_linearLayout.addView(b_logEntry1);
-            }
-        });
+            // Adds a new entry to the scroll view
+            case R.id.buttonADDLOG:
+                // Create log entry
+                ID += 1;
+                String str_ID = Integer.toString(ID);
+                Button createdLogEntry = new Button(this);
+                createdLogEntry.setText(("Entry " + str_ID));
+                l_linearLayout.addView(createdLogEntry);
+                break;
+        }
     }
-}
+} // end logDiaryHomepage
