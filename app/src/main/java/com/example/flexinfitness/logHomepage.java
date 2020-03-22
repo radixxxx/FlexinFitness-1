@@ -15,12 +15,9 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
 {
     // Declare View & ViewGroup variables
     Button addLogButton;
-    LinearLayout l_linearLayout;
-    ConstraintLayout c_constraintLayout;
+    LinearLayout linearLayout;
+    ConstraintLayout constraintLayout;
 
-
-    // counter for entries(temprarily here until I implement a view that asks them for more info
-    // for the entry)
     static int ID = 0;
 
     // start onCreate() ============================================================================
@@ -31,11 +28,12 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_log_diary_homepage);
 
         // Connect View & ViewGroup variables to their XML id's
-        c_constraintLayout = findViewById(R.id.constraintLayout);
-        l_linearLayout = findViewById(R.id.linearLayout);
+        constraintLayout = findViewById(R.id.constraintLayout);
+
+        linearLayout = findViewById(R.id.linearLayout);
+
         addLogButton = findViewById(R.id.buttonADDLOG);
         addLogButton.setOnClickListener(this);
-
     } // end onCreate() ============================================================================
 
     // start onClick() =============================================================================
@@ -52,7 +50,6 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
                 createdLogEntry.setOnClickListener(getOnClickDoSomething(createdLogEntry));
                 break;
         } // end switch(view.getId()
-
     } // end onClick() =============================================================================
 
     // start createLogEntry() ======================================================================
@@ -65,7 +62,7 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
         Button createdLogEntry = new Button(this);
         createdLogEntry.setText(("Entry " + str_ID));
         createdLogEntry.setId(firstEntry);
-        l_linearLayout.addView(createdLogEntry);
+        linearLayout.addView(createdLogEntry);
         return createdLogEntry;
     } // end createLogEntry() ======================================================================
 
@@ -90,21 +87,19 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
 
                 // add 'logEntryName' EditText View to c_constraintLayout
                 // logEntryName is a child of c_constraintLayout
-                c_constraintLayout.addView(logEntryName);
+                constraintLayout.addView(logEntryName);
 
                 // setting constraints on 'logEntryName' EditText View
                 ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(c_constraintLayout);
+                constraintSet.clone(constraintLayout);
 
-                constraintSet.connect(logEntryName.getId(), ConstraintSet.LEFT, c_constraintLayout.getId(), ConstraintSet.LEFT);
-                constraintSet.connect(logEntryName.getId(), ConstraintSet.RIGHT, c_constraintLayout.getId(), ConstraintSet.RIGHT);
-                constraintSet.connect(logEntryName.getId(), ConstraintSet.TOP, c_constraintLayout.getId(), ConstraintSet.TOP);
-                constraintSet.connect(logEntryName.getId(), ConstraintSet.BOTTOM, c_constraintLayout.getId(), ConstraintSet.BOTTOM);
+                constraintSet.connect(logEntryName.getId(), ConstraintSet.LEFT, constraintLayout.getId(), ConstraintSet.LEFT);
+                constraintSet.connect(logEntryName.getId(), ConstraintSet.RIGHT, constraintLayout.getId(), ConstraintSet.RIGHT);
+                constraintSet.connect(logEntryName.getId(), ConstraintSet.TOP, constraintLayout.getId(), ConstraintSet.TOP);
+                constraintSet.connect(logEntryName.getId(), ConstraintSet.BOTTOM, constraintLayout.getId(), ConstraintSet.BOTTOM);
 
-                constraintSet.applyTo(c_constraintLayout);
+                constraintSet.applyTo(constraintLayout);
             }
         };
     } // end getOnClickDoSomething() ===============================================================
-
-
 } // end logDiaryHomepage class ====================================================================
