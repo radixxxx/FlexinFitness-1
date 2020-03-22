@@ -46,5 +46,6 @@ public class logDiaryHomepage extends AppCompatActivity implements View.OnClickL
                 l_linearLayout.addView(createdLogEntry);
                 break;
         }
-    }
+    } // end onClick
+
 } // end logDiaryHomepage
