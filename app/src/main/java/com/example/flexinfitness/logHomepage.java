@@ -15,12 +15,9 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
 {
     // Declare View & ViewGroup variables
     Button addLogButton;
-    LinearLayout l_linearLayout;
-    ConstraintLayout c_constraintLayout;
+    LinearLayout linearLayout;
+    ConstraintLayout root_constraintLayout;
 
-
-    // counter for entries(temprarily here until I implement a view that asks them for more info
-    // for the entry)
     static int ID = 0;
 
     // start onCreate() ============================================================================
@@ -28,14 +25,15 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_diary_homepage);
+        setContentView(R.layout.activity_log_homepage);
 
         // Connect View & ViewGroup variables to their XML id's
-        c_constraintLayout = findViewById(R.id.constraintLayout);
-        l_linearLayout = findViewById(R.id.linearLayout);
+        root_constraintLayout = findViewById(R.id.constraintLayout);
+
+        linearLayout = findViewById(R.id.linearLayout);
+
         addLogButton = findViewById(R.id.buttonADDLOG);
         addLogButton.setOnClickListener(this);
-
     } // end onCreate() ============================================================================
 
     // start onClick() =============================================================================
@@ -65,7 +63,7 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
         Button createdLogEntry = new Button(this);
         createdLogEntry.setText(("Entry " + str_ID));
         createdLogEntry.setId(firstEntry);
-        l_linearLayout.addView(createdLogEntry);
+        linearLayout.addView(createdLogEntry);
         return createdLogEntry;
     } // end createLogEntry() ======================================================================
 
@@ -81,8 +79,8 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
                 EditText logEntryName = new EditText(logHomepage.this);
 
                 // set properties of edit text
-                int ID = 0;
-                logEntryName.setId(ID);
+                //int logEntryName_xml = 0;
+                logEntryName.setId(View.generateViewId());
                 logEntryName.setHint("ENTER WORKOUT NAME");
                 ConstraintLayout.LayoutParams clp_logEntryName = new ConstraintLayout.LayoutParams
                         (ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
@@ -90,18 +88,18 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
 
                 // add 'logEntryName' EditText View to c_constraintLayout
                 // logEntryName is a child of c_constraintLayout
-                c_constraintLayout.addView(logEntryName);
+                root_constraintLayout.addView(logEntryName);
 
                 // setting constraints on 'logEntryName' EditText View
                 ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(c_constraintLayout);
+                constraintSet.clone(root_constraintLayout);
 
-                constraintSet.connect(logEntryName.getId(), ConstraintSet.LEFT, c_constraintLayout.getId(), ConstraintSet.LEFT);
-                constraintSet.connect(logEntryName.getId(), ConstraintSet.RIGHT, c_constraintLayout.getId(), ConstraintSet.RIGHT);
-                constraintSet.connect(logEntryName.getId(), ConstraintSet.TOP, c_constraintLayout.getId(), ConstraintSet.TOP);
-                constraintSet.connect(logEntryName.getId(), ConstraintSet.BOTTOM, c_constraintLayout.getId(), ConstraintSet.BOTTOM);
+                constraintSet.connect(logEntryName.getId(), ConstraintSet.LEFT, root_constraintLayout.getId(), ConstraintSet.LEFT);
+                constraintSet.connect(logEntryName.getId(), ConstraintSet.RIGHT, root_constraintLayout.getId(), ConstraintSet.RIGHT);
+                constraintSet.connect(logEntryName.getId(), ConstraintSet.TOP, root_constraintLayout.getId(), ConstraintSet.TOP);
+                constraintSet.connect(logEntryName.getId(), ConstraintSet.BOTTOM, root_constraintLayout.getId(), ConstraintSet.BOTTOM);
 
-                constraintSet.applyTo(c_constraintLayout);
+                constraintSet.applyTo(root_constraintLayout);
             }
         };
     } // end getOnClickDoSomething() ===============================================================
