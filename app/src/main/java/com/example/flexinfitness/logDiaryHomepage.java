@@ -7,30 +7,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+//start logDiaryHomepage class =====================================================================
 public class logDiaryHomepage extends AppCompatActivity implements View.OnClickListener
 {
-    // Declare view variables
+    // Declare View & ViewGroup variables
     Button addLogButton;
     LinearLayout l_linearLayout;
 
-    // Static Identifier counter
+    // counter for entries(temprarily here until I implement a view that asks them for more info
+    // for the entry)
     static int ID = 0;
 
 
+    // start onCreate() ============================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_diary_homepage);
 
-        // Connect the view variables to XML id's
+        // Connect View & ViewGroup variables to their XML id's
         l_linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         addLogButton = (Button) findViewById(R.id.buttonADDLOG);
+
+
         addLogButton.setOnClickListener(this);
 
-    } // end onCreate
+    } // end onCreate() ============================================================================
 
 
+    // start onClick() =============================================================================
     @Override
     public void onClick(View view)
     {
@@ -45,7 +51,8 @@ public class logDiaryHomepage extends AppCompatActivity implements View.OnClickL
                 createdLogEntry.setText(("Entry " + str_ID));
                 l_linearLayout.addView(createdLogEntry);
                 break;
-        }
-    } // end onClick
+        } // end switch(view.getId()
 
-} // end logDiaryHomepage
+    } // end onClick() =============================================================================
+
+} // end logDiaryHomepage class ====================================================================
