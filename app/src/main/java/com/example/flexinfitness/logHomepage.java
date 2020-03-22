@@ -77,7 +77,7 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
                 // declare edit text
                 EditText logEntryName = new EditText(logHomepage.this);
 
-                // set properties of edit text
+                // set properties of edit textc
                 int ID = 0;
                 logEntryName.setId(ID);
                 logEntryName.setHint("ENTER WORKOUT NAME");
