@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +30,8 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
     LinearLayout rightLinearLayout;
     LinearLayout editTextLinearyLayout;
+
+    Button submitValuesButton;
 
     // start onCreate() ============================================================================
     @Override
@@ -59,6 +62,8 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
         rightLinearLayout = findViewById(R.id.rightLinearLayout);
         editTextLinearyLayout = findViewById(R.id.editTextLinearLayout);
+
+        submitValuesButton = findViewById(R.id.submitValuesButton);
 
     } // end onCreate() ============================================================================
 
