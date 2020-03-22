@@ -8,7 +8,7 @@
     tools:ignore="ExtraText">
 
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_marginTop="57dp"
@@ -16,24 +16,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        app:layout_constraintTop_toBottomOf="@+id/buttonADDLOG">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
 
             <Button
                 android:id="@+id/button2"
@@ -52,18 +41,18 @@
         android:text="Log History"
         android:textColor="#000000"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.049" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonADDLOG"
         android:layout_width="107dp"
         android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:text="+ Add Log"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintStart_toEndOf="@+id/textView"
