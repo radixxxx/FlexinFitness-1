@@ -3,6 +3,7 @@ package com.example.flexinfitness;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +16,6 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
     Button addLogButton;
     LinearLayout linearLayout;
     ConstraintLayout constraintLayout;
-
-    static int ID = 0;
 
     // start onCreate() ============================================================================
     @Override
@@ -40,37 +39,12 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
     {
         switch(view.getId())
         {
-            // Adds a new entry to the scroll view
+            // create a log entry
             case R.id.buttonADDLOG:
-                // Create log entry
-                Button createdLogEntry = createLogEntry();
-                // Set a click listener to it
-                createdLogEntry.setOnClickListener(onEntryClick(createdLogEntry));
+                Intent createLogEntry = new Intent(getApplicationContext(), createLogEntry.class);
+                startActivity(createLogEntry);
                 break;
         } // end switch(view.getId()
     } // end onClick() =============================================================================
 
-
-    // start createLogEntry() ======================================================================
-    public Button createLogEntry()
-    {
-        ID += 1;
-        int firstEntry = ID;
-        String str_ID = Integer.toString(ID);
-        // declare and initialize log entry variable
-        Button createdLogEntry = new Button(this);
-        createdLogEntry.setText(("Entry " + str_ID));
-        createdLogEntry.setId(firstEntry);
-        linearLayout.addView(createdLogEntry);
-        return createdLogEntry;
-    } // end createLogEntry() ======================================================================
-
-    // start getOnClickDoSomething() ===============================================================
-    View.OnClickListener onEntryClick(final Button button) {
-        return new View.OnClickListener() {
-            public void onClick(View view) {
-
-            }
-        };
-    } // end getOnClickDoSomething() ===============================================================
 } // end logDiaryHomepage class ====================================================================
