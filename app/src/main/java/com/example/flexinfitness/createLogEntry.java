@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class createLogEntry extends AppCompatActivity implements View.OnClickListener
 {
     // declare View & ViewGroup variables
@@ -58,6 +60,33 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v)
     {
-
+        switch(v.getId())
+        {
+            case R.id.rightWorkoutNameTextView:
+                changeVisibility(rightWorkoutNameTextView, workoutNameEditText);
+                String str_workoutName = getEditText(workoutNameEditText);
+                rightWorkoutNameTextView.setText(str_workoutName);
+                changeVisibility(rightWorkoutNameTextView, workoutNameEditText);
+                break;
+        }
     } // end onClick() =============================================================================
-}
+
+    // start changeVisibility() ====================================================================
+    public void changeVisibility(TextView txtV, EditText edTxt)
+    {
+        if( txtV.getVisibility() == View.VISIBLE)
+        {
+            txtV.setVisibility(View.GONE);
+            edTxt.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            txtV.setVisibility(View.VISIBLE);
+            edTxt.setVisibility(View.GONE);
+        }
+    } // end changeVisibility() ====================================================================
+
+    // start getEditText() =========================================================================
+    public String getEditText(EditText edTxt) { return edTxt.getText().toString(); }
+    // end getEditText() ===========================================================================
+} // end class createLogEntry ======================================================================
