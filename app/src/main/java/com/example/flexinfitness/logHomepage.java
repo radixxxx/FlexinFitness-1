@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 //start logHomepage class =====================================================================
 public class logHomepage extends AppCompatActivity implements View.OnClickListener
@@ -76,8 +77,24 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
             String str_workoutName = workoutData.getString("WORKOUT_NAME");
             String str_workoutDate = workoutData.getString("WORKOUT_DATE");
 
-
-
+            addLog(str_workoutName, str_workoutDate);
         }
     } // end onActivityResult() ====================================================================
+
+    // start addLog() ==============================================================================
+    public void addLog(String str_workoutName, String str_workoutDate)
+    {
+        // create log entry & set properties
+        TextView logEntry = new TextView(logHomepage.this);
+        logEntry.setId(View.generateViewId());
+
+        LinearLayout.LayoutParams llp_textView = new
+                LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+        logEntry.setLayoutParams(llp_textView);
+
+        // add log entry to linear layout
+        linearLayout.addView(logEntry);
+    } // end addLog() ==============================================================================
 } // end logDiaryHomepage class ====================================================================
