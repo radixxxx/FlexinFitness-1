@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.io.*;
 
 //start logHomepage class =====================================================================
 public class logHomepage extends AppCompatActivity implements View.OnClickListener
@@ -73,8 +74,14 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
             // extract the stored data from the bundle
             String str_workoutName = data.getExtras().getString("WORKOUT_NAME");
             String str_workoutDate = data.getExtras().getString("WORKOUT_DATE");
-
-            addLog(str_workoutName, str_workoutDate);
+            if( null !=  str_workoutDate && null != str_workoutName)
+            {
+                addLog(str_workoutName.toUpperCase(), str_workoutDate.toUpperCase());
+            }
+            else
+            {
+                addLog(str_workoutName, str_workoutDate);
+            }
         }
     } // end onActivityResult() ====================================================================
 
