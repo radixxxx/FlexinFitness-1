@@ -16,7 +16,6 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         createNotificationChannels();
 
     }
@@ -42,9 +41,6 @@ public class BaseApplication extends Application {
             NotificationManager manager  = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel1);
             manager.createNotificationChannel(channel2);
-
-        }
-        else{
 
         }
     }

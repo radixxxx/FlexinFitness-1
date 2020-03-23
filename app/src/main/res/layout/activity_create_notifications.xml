@@ -11,25 +11,25 @@
 
     <EditText
         android:id="@+id/titleEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Title"/>
 
     <EditText
         android:id="@+id/messageEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Message"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send on channel 1"
+        android:text="Send to channel 1"
         android:onClick="sendOnChannel1"/>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send on channel 1"
+        android:text="Send to channel 2"
         android:onClick="sendOnChannel2"/>
 
 
