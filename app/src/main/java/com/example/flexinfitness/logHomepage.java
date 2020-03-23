@@ -1,5 +1,6 @@
 package com.example.flexinfitness;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -19,6 +20,8 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
     LinearLayout linearLayout;
 
     ConstraintLayout constraintLayout;
+
+    public static final int REQUEST_CODE = 1;
 
     // start onCreate() ============================================================================
     @Override
@@ -49,7 +52,7 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
             // create a log entry
             case R.id.buttonADDLOG:
                 Intent createLogEntry = new Intent(getApplicationContext(), createLogEntry.class);
-                startActivity(createLogEntry);
+                startActivityForResult(createLogEntry, REQUEST_CODE);
                 break;
             case R.id.goBackToDashboardButton:
                 Intent goBackToDashboard = new Intent(getApplicationContext(), DashBoard.class);
@@ -58,4 +61,23 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
         } // end switch(view.getId()
     } // end onClick() =============================================================================
 
+    // start onActivityResult() ====================================================================
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if( REQUEST_CODE == requestCode && resultCode == RESULT_OK)
+        {
+            // extract intent & bundle from the activity
+            Intent createLogEntry = getIntent();
+            Bundle workoutData = createLogEntry.getExtras();
+
+            // extract the stored data from the bundle
+            String str_workoutName = workoutData.getString("WORKOUT_NAME");
+            String str_workoutDate = workoutData.getString("WORKOUT_DATE");
+
+
+
+        }
+    } // end onActivityResult() ====================================================================
 } // end logDiaryHomepage class ====================================================================

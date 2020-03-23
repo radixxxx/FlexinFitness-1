@@ -105,14 +105,12 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
             case R.id.rightStartTimeTextView:
             case R.id.rightDurationTextView:
             case R.id.rightBodyWeightTextView:
-
                 // hide TextViews and expose the EditTexts' and submitValuesButton
                 rightLinearLayout.setVisibility(View.GONE);
                 editTextLinearLayout.setVisibility(View.VISIBLE);
                 submitValuesButton.setVisibility(View.VISIBLE);
                 break;
             case R.id.submitValuesButton:
-
                 // get the input & display it on the TextViews
                 submitValueButtonActionOne();
                 // populate the scrollView log with a new entry
@@ -125,13 +123,12 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                 Bundle workoutData = new Bundle();
                 workoutData.putString("WORKOUT_NAME",str_workoutName);
                 workoutData.putString("WORKOUT_DATE", str_date);
-
                 // declare intent and pass back data
                 Intent backToLogHomepage = new Intent(this, logHomepage.class);
                 backToLogHomepage.putExtras(workoutData);
-
-                // go back to log home page
-                startActivity(backToLogHomepage);
+                // set result & finish
+                setResult(RESULT_OK, backToLogHomepage);
+                finish();
                 break;
             case R.id.addExerciseButton:
                 addEditTextToLinearLayout();
