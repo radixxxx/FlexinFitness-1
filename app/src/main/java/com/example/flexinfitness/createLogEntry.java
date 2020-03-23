@@ -40,9 +40,12 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     Button doneButton;
     Button addExerciseButton;
 
+    // to be used to passes back when the doneButton is clicked
+    String str_workoutName;
+    String str_date;
+
     // to hold all of the exercises that they input
     Vector exercises = new Vector();
-
 
     // start onCreate() ============================================================================
     @Override
@@ -102,12 +105,14 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
             case R.id.rightStartTimeTextView:
             case R.id.rightDurationTextView:
             case R.id.rightBodyWeightTextView:
+
                 // hide TextViews and expose the EditTexts' and submitValuesButton
                 rightLinearLayout.setVisibility(View.GONE);
                 editTextLinearLayout.setVisibility(View.VISIBLE);
                 submitValuesButton.setVisibility(View.VISIBLE);
                 break;
             case R.id.submitValuesButton:
+
                 // get the input & display it on the TextViews
                 submitValueButtonActionOne();
                 // populate the scrollView log with a new entry
@@ -116,7 +121,16 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                 addExerciseButton.setVisibility(View.VISIBLE);
                 break;
             case R.id.doneButton:
-                Intent backToLogHomepage = new Intent(getApplicationContext(), logHomepage.class);
+                //prepare bundle of workout data
+                Bundle workoutData = new Bundle();
+                workoutData.putString("WORKOUT_NAME",str_workoutName);
+                workoutData.putString("WORKOUT_DATE", str_date);
+
+                // declare intent and pass back data
+                Intent backToLogHomepage = new Intent(this, logHomepage.class);
+                backToLogHomepage.putExtras(workoutData);
+
+                // go back to log home page
                 startActivity(backToLogHomepage);
                 break;
             case R.id.addExerciseButton:
@@ -128,10 +142,10 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     // start submitValueButtonActionOne() ==========================================================
     public void submitValueButtonActionOne()
     {
-        String str_workoutName = workoutNameEditText.getText().toString();
+        str_workoutName= workoutNameEditText.getText().toString();
         rightWorkoutNameTextView.setText(str_workoutName);
 
-        String str_date = dateEditText.getText().toString();
+        str_date = dateEditText.getText().toString();
         rightDateTextView.setText(str_date);
         dateTextView.setText(str_date);
 
@@ -185,5 +199,5 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
         // add the view to the layout
         fuckLinearLayout.addView(exerciseEntry);
-    }
+    } // end addEditTextToLinearLayout() ===========================================================
 } // end class createLogEntry ======================================================================
