@@ -1,11 +1,10 @@
 package com.example.flexinfitness;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,9 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.Vector;
 
 public class createLogEntry extends AppCompatActivity implements View.OnClickListener
@@ -35,12 +31,17 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     TextView dateTextView;
 
     LinearLayout rightLinearLayout;
-    LinearLayout editTextLinearyLayout;
+    LinearLayout editTextLinearLayout;
+    LinearLayout fuckLinearLayout;
 
     ScrollView scrollView;
 
     Button submitValuesButton;
     Button doneButton;
+
+    // to hold all of the exercises that they input
+    Vector exercises = new Vector();
+
 
     // start onCreate() ============================================================================
     @Override
@@ -81,7 +82,8 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
         // set the layout's onClick's
         rightLinearLayout = findViewById(R.id.rightLinearLayout);
-        editTextLinearyLayout = findViewById(R.id.editTextLinearLayout);
+        editTextLinearLayout = findViewById(R.id.editTextLinearLayout);
+        fuckLinearLayout = findViewById(R.id.fuckLinearLayout);
 
     } // end onCreate() ============================================================================
 
@@ -99,7 +101,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
             case R.id.rightBodyWeightTextView:
                 // hide TextViews and expose the EditTexts' and submitValuesButton
                 rightLinearLayout.setVisibility(View.GONE);
-                editTextLinearyLayout.setVisibility(View.VISIBLE);
+                editTextLinearLayout.setVisibility(View.VISIBLE);
                 submitValuesButton.setVisibility(View.VISIBLE);
                 break;
             case R.id.submitValuesButton:
@@ -136,15 +138,27 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         rightBodyWeightTextView.setText((str_bodyWeight + "lbs"));
 
         dateTextView.setVisibility(View.VISIBLE);
-        editTextLinearyLayout.setVisibility(View.GONE);
+        editTextLinearLayout.setVisibility(View.GONE);
         rightLinearLayout.setVisibility(View.VISIBLE);
         submitValuesButton.setVisibility(View.GONE);
     } // end submitValueButtonActionOne() ==========================================================
 
     // start submitValueButtonActionTwo() ==========================================================
     public void submitValueButtonActionTwo()
-    {   //populates the scrollview layout with entries
+    {
+        // create the EditText & set the properties
+        EditText exerciseEntry = new EditText(createLogEntry.this);
+        exerciseEntry.setId(View.generateViewId());
 
+        exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        exerciseEntry.setSingleLine(false);
 
+        LinearLayout.LayoutParams llp_edittext = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        exerciseEntry.setLayoutParams(llp_edittext);
+
+        // add the view to the layout
+        fuckLinearLayout.addView(exerciseEntry);
     } //end submitValueButtonActionTwo() ===========================================================
 } // end class createLogEntry ======================================================================
