@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -69,13 +70,9 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
         if( REQUEST_CODE == requestCode && resultCode == RESULT_OK)
         {
-            // extract intent & bundle from the activity
-            Intent createLogEntry = getIntent();
-            Bundle workoutData = createLogEntry.getExtras();
-
             // extract the stored data from the bundle
-            String str_workoutName = workoutData.getString("WORKOUT_NAME");
-            String str_workoutDate = workoutData.getString("WORKOUT_DATE");
+            String str_workoutName = data.getExtras().getString("WORKOUT_NAME");
+            String str_workoutDate = data.getExtras().getString("WORKOUT_DATE");
 
             addLog(str_workoutName, str_workoutDate);
         }
@@ -87,6 +84,11 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
         // create log entry & set properties
         TextView logEntry = new TextView(logHomepage.this);
         logEntry.setId(View.generateViewId());
+        logEntry.setText(str_workoutName + "      " +str_workoutDate);
+        logEntry.setTextColor(Color.BLACK);
+        logEntry.setTextSize(25);
+        logEntry.setBackgroundColor(Color.LTGRAY);
+
 
         LinearLayout.LayoutParams llp_textView = new
                 LinearLayout.LayoutParams(
