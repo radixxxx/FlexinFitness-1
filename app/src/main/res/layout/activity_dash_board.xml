@@ -108,7 +108,7 @@
                         android:layout_height="80dp"
                         android:layout_marginTop="12dp"
                         android:src="@drawable/ic_launcher_background"
-                        android:text="DIARY/LOG"
+                        android:text="LOG"
                         android:textColor="#000000">
 
                     </Button>
