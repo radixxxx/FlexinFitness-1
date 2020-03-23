@@ -25,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:text="Franco\nFranco\nFranco" />
+                android:inputType="textMultiLine"/>
         </LinearLayout>
     </ScrollView>
 

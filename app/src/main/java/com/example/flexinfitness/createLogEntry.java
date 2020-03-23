@@ -143,7 +143,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
     // start submitValueButtonActionTwo() ==========================================================
     public void submitValueButtonActionTwo()
-    {
+    {   //populates the scrollview layout with entries
 
 
     } //end submitValueButtonActionTwo() ===========================================================
