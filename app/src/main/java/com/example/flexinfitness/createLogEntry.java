@@ -38,6 +38,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
     Button submitValuesButton;
     Button doneButton;
+    Button addExerciseButton;
 
     // to hold all of the exercises that they input
     Vector exercises = new Vector();
@@ -66,12 +67,14 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
         submitValuesButton = findViewById(R.id.submitValuesButton);
         doneButton = findViewById(R.id.doneButton);
+        addExerciseButton = findViewById(R.id.addExerciseButton);
 
         scrollView = findViewById(R.id.scrollView);
 
         // set the button's onClick's
         submitValuesButton.setOnClickListener(this);
         doneButton.setOnClickListener(this);
+        addExerciseButton.setOnClickListener(this);
 
         // set the 'TextViews' onClick's
         rightWorkoutNameTextView.setOnClickListener(this);
@@ -109,12 +112,16 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                 submitValueButtonActionOne();
                 // populate the scrollView log with a new entry
                 submitValueButtonActionTwo();
+                // makes the addExerciseButton visible
+                addExerciseButton.setVisibility(View.VISIBLE);
                 break;
             case R.id.doneButton:
                 Intent backToLogHomepage = new Intent(getApplicationContext(), logHomepage.class);
                 startActivity(backToLogHomepage);
                 break;
-
+            case R.id.addExerciseButton:
+                addEditTextToLinearLayout();
+                break;
         }
     } // end onClick() =============================================================================
 
@@ -161,4 +168,22 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         // add the view to the layout
         fuckLinearLayout.addView(exerciseEntry);
     } //end submitValueButtonActionTwo() ===========================================================
+
+    // start addEditTextToLinearLayout() ===========================================================
+    public void addEditTextToLinearLayout()
+    {
+        EditText exerciseEntry = new EditText(createLogEntry.this);
+        exerciseEntry.setId(View.generateViewId());
+
+        exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        exerciseEntry.setSingleLine(false);
+
+        LinearLayout.LayoutParams llp_edittext = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        exerciseEntry.setLayoutParams(llp_edittext);
+
+        // add the view to the layout
+        fuckLinearLayout.addView(exerciseEntry);
+    }
 } // end class createLogEntry ======================================================================

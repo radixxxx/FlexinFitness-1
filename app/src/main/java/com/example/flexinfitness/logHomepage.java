@@ -14,7 +14,10 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
 {
     // Declare View & ViewGroup variables
     Button addLogButton;
+    Button goBackToDashboardButton;
+
     LinearLayout linearLayout;
+
     ConstraintLayout constraintLayout;
 
     // start onCreate() ============================================================================
@@ -30,7 +33,11 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
         linearLayout = findViewById(R.id.linearLayout);
 
         addLogButton = findViewById(R.id.buttonADDLOG);
+        goBackToDashboardButton = findViewById(R.id.goBackToDashboardButton);
+
+        // setting the onClick's for the buttons
         addLogButton.setOnClickListener(this);
+        goBackToDashboardButton.setOnClickListener(this);
     } // end onCreate() ============================================================================
 
     // start onClick() =============================================================================
@@ -43,6 +50,10 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
             case R.id.buttonADDLOG:
                 Intent createLogEntry = new Intent(getApplicationContext(), createLogEntry.class);
                 startActivity(createLogEntry);
+                break;
+            case R.id.goBackToDashboardButton:
+                Intent goBackToDashboard = new Intent(getApplicationContext(), DashBoard.class);
+                startActivity(goBackToDashboard);
                 break;
         } // end switch(view.getId()
     } // end onClick() =============================================================================
