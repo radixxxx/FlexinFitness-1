@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -35,6 +36,8 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
     LinearLayout rightLinearLayout;
     LinearLayout editTextLinearyLayout;
+
+    ScrollView scrollView;
 
     Button submitValuesButton;
     Button doneButton;
@@ -62,6 +65,8 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
         submitValuesButton = findViewById(R.id.submitValuesButton);
         doneButton = findViewById(R.id.doneButton);
+
+        scrollView = findViewById(R.id.scrollView);
 
         // set the button's onClick's
         submitValuesButton.setOnClickListener(this);
@@ -98,7 +103,10 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                 submitValuesButton.setVisibility(View.VISIBLE);
                 break;
             case R.id.submitValuesButton:
+                // get the input & display it on the TextViews
                 submitValueButtonActionOne();
+                // populate the scrollView log with a new entry
+                submitValueButtonActionTwo();
                 break;
             case R.id.doneButton:
                 Intent backToLogHomepage = new Intent(getApplicationContext(), logHomepage.class);
@@ -132,4 +140,11 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         rightLinearLayout.setVisibility(View.VISIBLE);
         submitValuesButton.setVisibility(View.GONE);
     } // end submitValueButtonActionOne() ==========================================================
+
+    // start submitValueButtonActionTwo() ==========================================================
+    public void submitValueButtonActionTwo()
+    {
+
+
+    } //end submitValueButtonActionTwo() ===========================================================
 } // end class createLogEntry ======================================================================
