@@ -7,6 +7,8 @@ import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -25,13 +27,16 @@ public class CreateNotifications extends AppCompatActivity {
         setContentView(R.layout.activity_create_notifications);
 
         notificationManager = NotificationManagerCompat.from(this);
-        titleEditText = findViewById(R.id.titleEditText);
-        messageEditText = findViewById(R.id.messageEditText);
     }
 
+    // Log notification
     public void sendOnChannel1(View view) {
-        String title = titleEditText.getText().toString();
-        String message = messageEditText.getText().toString();
+        String title = "Logs";
+        String message = "Remember to log your food daily!";
+
+        Intent activityIntent = new Intent(this, createLogEntry.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent,0);
+
 
         Notification notification = new NotificationCompat.Builder(this, testChannel1)
                 .setSmallIcon(R.drawable.ic_one)
@@ -39,11 +44,13 @@ public class CreateNotifications extends AppCompatActivity {
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_EVENT)
+                .setContentIntent(contentIntent)
                 .build();
 
         notificationManager.notify(1, notification);
     }
 
+    //Empty
     public void sendOnChannel2(View view) {
         String title = titleEditText.getText().toString();
         String message = messageEditText.getText().toString();

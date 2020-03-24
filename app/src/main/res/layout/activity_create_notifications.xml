@@ -9,29 +9,11 @@
     android:padding="16dp"
     tools:context=".CreateNotifications">
 
-    <EditText
-        android:id="@+id/titleEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Title"/>
-
-    <EditText
-        android:id="@+id/messageEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Message"/>
-
     <Button
+        android:id="@+id/settingsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send to channel 1"
+        android:text="Create Log Activity Notification"
         android:onClick="sendOnChannel1"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send to channel 2"
-        android:onClick="sendOnChannel2"/>
-
-
 
 </LinearLayout>

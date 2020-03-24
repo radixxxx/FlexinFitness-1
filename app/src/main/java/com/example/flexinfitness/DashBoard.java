@@ -22,7 +22,7 @@ public class DashBoard extends AppCompatActivity {
 
     Button logOut;
     Button diary;
-    Button notification;
+    Button settings;
     TextView name;
     TextView email;
 
@@ -37,7 +37,7 @@ public class DashBoard extends AppCompatActivity {
         logOut = findViewById(R.id.logOutButton);
         diary = findViewById(R.id.diaryButton);
         name = findViewById(R.id.nameTextView);
-        notification = findViewById(R.id.notificationButton);
+        settings = findViewById(R.id.settingsButton);
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signInAccount != null){
@@ -96,7 +96,7 @@ public class DashBoard extends AppCompatActivity {
         });
         // end LOG/DIARY button onClick ============================================================
 
-        notification.setOnClickListener(new View.OnClickListener() {
+        settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToNotifications = new Intent(getApplicationContext(), CreateNotifications.class);
