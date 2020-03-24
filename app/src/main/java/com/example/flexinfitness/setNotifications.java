@@ -15,8 +15,10 @@ import android.widget.EditText;
 
 import static com.example.flexinfitness.BaseApplication.testChannel1;
 import static com.example.flexinfitness.BaseApplication.testChannel2;
+import static com.example.flexinfitness.BaseApplication.testChannel3;
+import static com.example.flexinfitness.BaseApplication.testChannel4;
 
-public class CreateNotifications extends AppCompatActivity {
+public class setNotifications extends AppCompatActivity {
     private NotificationManagerCompat notificationManager;
     private EditText titleEditText;
     private EditText messageEditText;
@@ -52,17 +54,49 @@ public class CreateNotifications extends AppCompatActivity {
 
     //Empty
     public void sendOnChannel2(View view) {
-        String title = titleEditText.getText().toString();
-        String message = messageEditText.getText().toString();
+        String title = "title2";
+        String message = "message2";
 
         Notification notification = new NotificationCompat.Builder(this, testChannel2)
                 .setSmallIcon(R.drawable.ic_two)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_EVENT)
                 .build();
 
         notificationManager.notify(2, notification);
+    }
+
+    //Empty
+    public void sendOnChannel3(View view) {
+        String title = "title3";
+        String message = "message3";
+
+        Notification notification = new NotificationCompat.Builder(this, testChannel3)
+                .setSmallIcon(R.drawable.ic_three)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_EVENT)
+                .build();
+
+        notificationManager.notify(3, notification);
+    }
+
+    //Empty
+    public void sendOnChannel4(View view) {
+        String title = "title4";
+        String message = "message4";
+
+        Notification notification = new NotificationCompat.Builder(this, testChannel4)
+                .setSmallIcon(R.drawable.ic_four)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_EVENT)
+                .build();
+
+        notificationManager.notify(4, notification);
     }
 }

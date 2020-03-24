@@ -24,7 +24,6 @@ public class DashBoard extends AppCompatActivity {
     Button diary;
     Button settings;
     TextView name;
-    TextView email;
 
 
     @Override
@@ -99,8 +98,8 @@ public class DashBoard extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToNotifications = new Intent(getApplicationContext(), CreateNotifications.class);
-                startActivity(goToNotifications);
+                Intent goToSettings = new Intent(getApplicationContext(), settingOptions.class);
+                startActivity(goToSettings);
             }
         });
     }
