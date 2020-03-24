@@ -10,12 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settingOptions"></activity>
-        <activity
-            android:name=".createLogEntry"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".setNotifications" />
-        <activity android:name=".logHomepage" />
+<<<<<<< HEAD
+        <activity android:name=".CreateNotifications"></activity>
+=======
+        <activity android:name=".createLogEntry"
+                  android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".logHomepage"/>
+>>>>>>> 0ed8dd09b77825b22eeadc3ef9f5ad0b48faee4e
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

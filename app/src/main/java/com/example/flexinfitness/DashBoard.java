@@ -22,8 +22,9 @@ public class DashBoard extends AppCompatActivity {
 
     Button logOut;
     Button diary;
+    Button settings;
     TextView name;
-    TextView email;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class DashBoard extends AppCompatActivity {
         logOut = findViewById(R.id.logOutButton);
         diary = findViewById(R.id.diaryButton);
         name = findViewById(R.id.nameTextView);
+        settings = findViewById(R.id.settingsButton);
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signInAccount != null){
@@ -93,5 +95,12 @@ public class DashBoard extends AppCompatActivity {
         });
         // end LOG/DIARY button onClick ============================================================
 
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToSettings = new Intent(getApplicationContext(), settingOptions.class);
+                startActivity(goToSettings);
+            }
+        });
     }
 }
