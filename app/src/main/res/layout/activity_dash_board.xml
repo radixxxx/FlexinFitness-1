@@ -169,15 +169,17 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <Button
+                        android:id="@+id/workoutPlannerButton"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="12dp"
                         android:src="@drawable/ic_launcher_background"
-                        android:text="Functionality"
-                        android:textColor="#000000">
+                        android:text="Workout Planner"
+                        android:textColor="#000000"
+                        android:textSize="11dp">
 
-                    </TextView>
+                    </Button>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
