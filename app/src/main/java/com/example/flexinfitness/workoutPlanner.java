@@ -68,9 +68,10 @@ public class workoutPlanner extends AppCompatActivity implements View.OnClickLis
             case R.id.submitButton:
                 Vector<String> inputs = getInputs();
                 addView(inputs);
+                clearEditTexts();
                 break;
-        }
 
+        }
     } // end onClick() =============================================================================
 
     // start getInputs() ===========================================================================
@@ -117,4 +118,13 @@ public class workoutPlanner extends AppCompatActivity implements View.OnClickLis
         // add the view to the layout
         linearLayout.addView(workoutEntry);
     } // end addView() =============================================================================
+
+    // start clearEditTexts() ======================================================================
+    public void clearEditTexts()
+    {
+        workoutNameEditText.getText().clear();
+        dateToPerformEditText.getText().clear();
+        timeToPerformEditText.getText().clear();
+        restBetweenSetsEditText.getText().clear();
+    } // end clearEditTexts() ======================================================================
 } // end workoutPlanner class ======================================================================
