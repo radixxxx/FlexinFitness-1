@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settingOptions"></activity>
+        <activity android:name=".workoutPlanner"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".settingOptions" />
         <activity
             android:name=".createLogEntry"
             android:windowSoftInputMode="adjustPan" />

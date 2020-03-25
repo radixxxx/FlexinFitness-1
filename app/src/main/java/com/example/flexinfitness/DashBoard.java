@@ -20,10 +20,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class DashBoard extends AppCompatActivity {
 
+    // declaring the View & ViewGroups
     Button logOut;
     Button diary;
     Button settings;
+    Button workoutPlannerButton;
+
     TextView name;
+
 
 
     @Override
@@ -34,9 +38,11 @@ public class DashBoard extends AppCompatActivity {
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         logOut = findViewById(R.id.logOutButton);
+        // diary == logButton lol I need to go back and change this
         diary = findViewById(R.id.diaryButton);
         name = findViewById(R.id.nameTextView);
         settings = findViewById(R.id.settingsButton);
+        workoutPlannerButton = findViewById(R.id.workoutPlannerButton);
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signInAccount != null){
@@ -83,7 +89,7 @@ public class DashBoard extends AppCompatActivity {
             startActivity(intent);
         }
 
-        // goes to the LOG/DIARY homepage upon clicking the button in the dashboard ================
+        // goes to the log activity ================================================================
         diary.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -92,8 +98,18 @@ public class DashBoard extends AppCompatActivity {
                 Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), logHomepage.class);
                 startActivity(gotoLOGDIARYHOMEPAGE);
             }
-        });
-        // end LOG/DIARY button onClick ============================================================
+        }); // end LOG/DIARY button onClick ========================================================
+
+        // goes to the workoutPlanner activity =====================================================
+        workoutPlannerButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent workoutPlanner = new Intent(DashBoard.this, workoutPlanner.class);
+                startActivity(workoutPlanner);
+            }
+        }); // end workoutPlanner ==================================================================
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
