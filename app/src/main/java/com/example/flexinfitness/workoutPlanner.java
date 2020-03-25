@@ -3,6 +3,7 @@ package com.example.flexinfitness;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -70,7 +71,10 @@ public class workoutPlanner extends AppCompatActivity implements View.OnClickLis
                 addView(inputs);
                 clearEditTexts();
                 break;
-
+            case R.id.doneButton:
+                Intent backToDashboard = new Intent(this, DashBoard.class);
+                startActivity(backToDashboard);
+                break;
         }
     } // end onClick() =============================================================================
 
