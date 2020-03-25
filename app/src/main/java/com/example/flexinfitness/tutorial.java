@@ -13,8 +13,10 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
 {
     // declare View & ViewGroups
     Button playButton;
+    Button playButton2;
 
     VideoView videoView;
+    VideoView videoView2;
 
     MediaController mediaController;
 
@@ -26,12 +28,15 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_tutorial);
 
         // connect View & ViewGroups
-        playButton = findViewById(R.id.playButton);
+        playButton = findViewById(R.id.playPushUpTutorial);
+        playButton2 = findViewById(R.id.playPushUpTutorialButton_2);
 
         videoView = findViewById(R.id.videoView);
+        videoView2 = findViewById(R.id.videoView2);
 
         // setting their onClicks
         playButton.setOnClickListener(this);
+        playButton2.setOnClickListener(this);
     } // end onCreate() ============================================================================
 
     // start onClick() =============================================================================
@@ -40,11 +45,13 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
     {
         switch (v.getId())
         {
-            case R.id.playButton:
+            case R.id.playPushUpTutorial:
                 playVideo();
                 break;
+            case R.id.playPushUpTutorialButton_2:
+                playVideo2();
+                break;
         }
-
     } // end onClick() =============================================================================
 
     // start playVideo() ===========================================================================
@@ -52,12 +59,28 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
     {
         mediaController = new MediaController(this);
 
-        String pathToVideo = "/home/radix/csuf_spring_2020/software_engineering/FlexinFitness-1/app/src/main/res/raw/software_engineering_video.MP4";
-
+        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.software_engineering_video;
         Uri uri = Uri.parse(pathToVideo);
-
         videoView.setVideoURI(uri);
+        videoView.requestFocus();
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
 
         videoView.start();
+    } // end playVideo() ===========================================================================
+
+    // start playVideo() ===========================================================================
+    public void playVideo2()
+    {
+        mediaController = new MediaController(this);
+
+        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.software_engineering_video;
+        Uri uri = Uri.parse(pathToVideo);
+        videoView2.setVideoURI(uri);
+        videoView2.requestFocus();
+        videoView2.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView2);
+
+        videoView2.start();
     } // end playVideo() ===========================================================================
 } // end tutorial class ============================================================================
