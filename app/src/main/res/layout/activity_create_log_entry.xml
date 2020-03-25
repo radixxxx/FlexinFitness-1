@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:layout_marginEnd="316dp"
-        android:text="Add Exercise"
+        android:text="@string/add_exercise_create_log"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            android:hint="@string/hint_name_create_log"/>
 
         <EditText
             android:id="@+id/dateEditText"
@@ -68,7 +69,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="date"
-            android:textSize="20dp"/>
+            android:textSize="20sp"
+            android:hint="@string/hint_date_create_log" />
+
 
         <EditText
             android:id="@+id/startTimeEditText"
@@ -76,7 +79,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="time"
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            android:hint="@string/hint_time_create_log"
+            android:autofillHints="@string/hint_time_create_log" />
 
         <EditText
             android:id="@+id/durationEditText"
@@ -84,15 +89,17 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName|numberDecimal"
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            android:hint="@string/hint_workout_duration"/>
 
         <EditText
             android:id="@+id/bodyWeightEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="20dp"
-            android:inputType="numberDecimal"/>
+            android:textSize="20sp"
+            android:inputType="numberDecimal"
+            android:hint="@string/total_weight_create_log"/>
 
     </LinearLayout>
 
@@ -116,45 +123,45 @@
                 android:id="@+id/leftWorkoutNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="WORKOUT NAME"
+                android:text="@string/workout_name_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/leftDateTextView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DATE"
+                android:text="@string/date_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/leftStartTimeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="START TIME"
+                android:text="@string/start_time_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/leftDurationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DURATION(mins)"
+                android:text="@string/duration_mins_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/leftBodyWeightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BODY WEIGHT(lbs)"
+                android:text="@string/body_weight_lbs_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
@@ -169,45 +176,45 @@
                 android:id="@+id/rightWorkoutNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CLICK"
+                android:hint="@string/click_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/rightDateTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CLICK"
+                android:hint="@string/click_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/rightStartTimeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CLICK"
+                android:hint="@string/click_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/rightDurationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CLICK"
+                android:hint="@string/click_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/rightBodyWeightTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CLICK"
+                android:hint="@string/click_create_log"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
@@ -217,8 +224,8 @@
         android:layout_width="103dp"
         android:layout_height="46dp"
         android:layout_marginEnd="36dp"
-        android:text="DONE"
-        android:textSize="18dp"
+        android:text="@string/done_create_log"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.977"
@@ -232,9 +239,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:text=""
         android:textColor="#000000"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -246,7 +253,7 @@
         android:layout_marginStart="47dp"
         android:layout_marginTop="34dp"
         android:layout_marginEnd="276dp"
-        android:text="SUBMIT VALUES"
+        android:text="@string/submit_values_create_log"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

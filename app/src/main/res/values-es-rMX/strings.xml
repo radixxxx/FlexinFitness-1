@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FlexinFitness</string>
+    <string name="name">nombre</string>
+    <string name="email">email</string>
+    <string name="done_create_log">HECHO</string>
+    <string name="workout_name_create_log">NOMBRE DE ENTRENAMIENTO</string>
+    <string name="date_create_log">FECHA</string>
+    <string name="start_time_create_log">HORA DE INICIO</string>
+    <string name="duration_mins_create_log">DURACIÓN (minutos)</string>
+    <string name="body_weight_lbs_create_log">PESO CORPORAL (libras)</string>
+    <string name="click_create_log">CLICK</string>
+    <string name="submit_values_create_log">" PRESENTAR VALORES"</string>
+    <string name="hint_name_create_log">Nombre</string>
+    <string name="hint_date_create_log">Fecha</string>
+    <string name="hint_time_create_log">Hora</string>
+    <string name="hint_workout_duration">" Minutos totales"</string>
+    <string name="add_exercise_create_log">" Agregar ejercicio"</string>
+    <string name="total_weight_create_log">" Peso total"</string>
+    <string name="add_log_home">" + Agregar registro"</string>
+    <string name="home_homepage">HOGAR</string>
+    <string name="log_history_homepage">" Historial de registro"</string>
+    <string name="sign_in_main">Inicia sesión</string>
+    <string name="sign_in_with_google_using_firebase_main">¡Inicia sesión con Google usando Firebase!</string>
+    <string name="sign_in_with_google_main">" Inicia sesión con Google"</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="workout_planner">PLANIFICADOR DE ENTRENAMIENTO</string>
+    <string name="rest_between_sets">DESCANSO ENTRE JUEGOS</string>
+    <string name="time_to_perform">TIEMPO DE REALIZAR</string>
+    <string name="date_to_perform">" FECHA PARA REALIZAR"</string>
+    <string name="workout_name">" NOMBRE DE ENTRENAMIENTO"</string>
+    <string name="done">HECHO</string>
+    <string name="submit">" ENVIAR"</string>
+    <string name="play_pushup_tutorial">" TUTORIAL DE JUEGO PUSHUP"</string>
+    <string name="logout">" CERRAR SESIÓN"</string>
+    <string name="settings">" AJUSTES"</string>
+    <string name="fitness_application">" Aplicación de ejercicios"</string>
+    <string name="log">Registro</string>
+    <string name="tutorials">" Tutoriales"</string>
+    <string name="functionality">" Funcionalidad"</string>
+    <string name="create_log_activity_notification">" Crear notificación de actividad de registro"</string>
+    <string name="create">Crear ...</string>
+</resources>

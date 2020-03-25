@@ -31,7 +31,7 @@
             android:includeFontPadding="false"
             android:paddingTop="20sp"
             android:shadowColor="#0E0E0E"
-            android:text="Sign In"
+            android:text="@string/sign_in_main"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="45sp" />
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:shadowColor="#0E0E0E"
-            android:text="Sign-In with Google using Firebase!"
+            android:text="@string/sign_in_with_google_using_firebase_main"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="14sp" />
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/common_google_signin_btn_text_dark_normal"
-            android:text="Sign In with Google"
+            android:text="@string/sign_in_with_google_main"
             android:textColor="#fff" />
 
 

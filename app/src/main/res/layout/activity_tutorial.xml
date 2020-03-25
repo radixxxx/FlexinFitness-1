@@ -21,7 +21,7 @@
             android:id="@+id/playPushUpTutorial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PLAY PUSHUP TUTORIAL" />
+            android:text="@string/play_pushup_tutorial" />
 
         <VideoView
             android:id="@+id/videoView"
@@ -32,7 +32,7 @@
             android:id="@+id/playPushUpTutorialButton_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PLAY PUSHUP TUTORIAL" />
+            android:text="@string/play_pushup_tutorial" />
 
         <VideoView
             android:id="@+id/videoView2"

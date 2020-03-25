@@ -13,17 +13,6 @@
         android:id="@+id/notificationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Notifications" />
+        android:text="@string/notifications" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Setting 2" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Setting 3" />
 </LinearLayout>
