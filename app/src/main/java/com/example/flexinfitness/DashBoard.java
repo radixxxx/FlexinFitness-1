@@ -25,10 +25,9 @@ public class DashBoard extends AppCompatActivity {
     Button diary;
     Button settings;
     Button workoutPlannerButton;
+    Button tutorialButton;
 
     TextView name;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +36,14 @@ public class DashBoard extends AppCompatActivity {
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+        // connecting Views & ViewGroups to their XMLs
         logOut = findViewById(R.id.logOutButton);
         // diary == logButton lol I need to go back and change this
         diary = findViewById(R.id.diaryButton);
         name = findViewById(R.id.nameTextView);
         settings = findViewById(R.id.settingsButton);
         workoutPlannerButton = findViewById(R.id.workoutPlannerButton);
+        tutorialButton = findViewById(R.id.tutorialButton);
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signInAccount != null){
@@ -110,6 +111,17 @@ public class DashBoard extends AppCompatActivity {
                 startActivity(workoutPlanner);
             }
         }); // end workoutPlanner ==================================================================
+
+        // goes to the TUTORIAL activity ===========================================================
+        tutorialButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent tutorial = new Intent(DashBoard.this, tutorial.class);
+                startActivity(tutorial);
+            }
+        }); // end TUTORIAL activity ===============================================================
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
