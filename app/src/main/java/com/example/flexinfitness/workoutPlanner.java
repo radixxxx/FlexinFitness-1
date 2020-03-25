@@ -39,6 +39,15 @@ public class workoutPlanner extends AppCompatActivity implements View.OnClickLis
         restBetweenSetsEditText = findViewById(R.id.restBetweenSetsEditText);
 
         linearLayout = findViewById(R.id.linearLayoutInsideScrollView);
+
+        // connect View & ViewGroups to their onClicks
+        doneButton.setOnClickListener(this);
+        submitButton.setOnClickListener(this);
+
+        workoutNameEditText.setOnClickListener(this);
+        dateToPerformEditText.setOnClickListener(this);
+        timeToPerformEditText.setOnClickListener(this);
+        restBetweenSetsEditText.setOnClickListener(this);
     } // end onCreate() ============================================================================
 
     // start onClick() =============================================================================
@@ -47,7 +56,7 @@ public class workoutPlanner extends AppCompatActivity implements View.OnClickLis
     {
         switch (v.getId())
         {
-            // case R.id.<nameOfViewID>
+            case R.id.doneButton
         }
 
     } // end onClick() =============================================================================
