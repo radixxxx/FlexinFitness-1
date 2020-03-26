@@ -40,4 +40,8 @@
     <string name="functionality">" Funcionalidad"</string>
     <string name="create_log_activity_notification">" Crear notificación de actividad de registro"</string>
     <string name="create">Crear ...</string>
+    <string name="play_pushups">Video de PushUps</string>
+    <string name="play_crunches">Video de Crunches</string>
+    <string name="play_squats">Video de Squats</string>
+    <string name="play_lunges">Video de Lunges</string>
 </resources>

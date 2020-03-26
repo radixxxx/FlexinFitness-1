@@ -39,4 +39,8 @@
     <string name="functionality">Functionality</string>
     <string name="create_log_activity_notification">Create Log Activity Notification</string>
     <string name="create">Create ...</string>
+    <string name="play_pushups">Play PushUps</string>
+    <string name="play_crunches">Play Crunches</string>
+    <string name="play_squats">Play Squats</string>
+    <string name="play_lunges">Play Lunges</string>
 </resources>
