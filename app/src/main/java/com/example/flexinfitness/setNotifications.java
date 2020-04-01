@@ -90,7 +90,7 @@ public class setNotifications extends AppCompatActivity {
         String message = "message4";
 
         Notification notification = new NotificationCompat.Builder(this, testChannel4)
-                .setSmallIcon(R.drawable.ic_four)
+                .setSmallIcon(R.drawable.ic_one)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
