@@ -41,7 +41,6 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         // connecting Views & ViewGroups to their XML ids
         logout = findViewById(R.id.logOutButton);
-
         name = findViewById(R.id.nameTextView);
         logButton = findViewById(R.id.logButton);
         settingsButton = findViewById(R.id.settingsButton);
