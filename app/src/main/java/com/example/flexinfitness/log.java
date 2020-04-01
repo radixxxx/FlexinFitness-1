@@ -34,11 +34,9 @@ public class log extends AppCompatActivity implements View.OnClickListener
 
         // Connect View & ViewGroup variables to their XML id's
         constraintLayout = findViewById(R.id.constraintLayout);
-
         linearLayout = findViewById(R.id.linearLayout);
-
-        addLogButton = findViewById(R.id.buttonADDLOG);
-        homeButton = findViewById(R.id.goBackToDashboardButton);
+        addLogButton = findViewById(R.id.addLogButton);
+        homeButton = findViewById(R.id.homeButton);
 
         // setting the onClick's for the buttons
         addLogButton.setOnClickListener(this);
@@ -52,18 +50,22 @@ public class log extends AppCompatActivity implements View.OnClickListener
         switch(view.getId())
         {
             // create a log entry
-            case R.id.buttonADDLOG:
+            case R.id.addLogButton:
                 Intent createLogEntry = new Intent(getApplicationContext(), createLogEntry.class);
                 startActivityForResult(createLogEntry, REQUEST_CODE);
                 break;
-            case R.id.goBackToDashboardButton:
+            case R.id.homeButton:
                 Intent goBackToDashboard = new Intent(getApplicationContext(), DashBoard.class);
                 startActivity(goBackToDashboard);
                 break;
         } // end switch(view.getId()
     } // end onClick() =============================================================================
 
+
     // start onActivityResult() ====================================================================
+    // input: N/A
+    // output: a bundle of information from the 'create log' functionality used to populate the text
+    //         the log
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
@@ -104,5 +106,17 @@ public class log extends AppCompatActivity implements View.OnClickListener
 
         // add log entry to linear layout
         linearLayout.addView(logEntry);
+
+        // set it's onClick
+        logEntry.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent createLogEntry = new Intent(getApplicationContext(), createLogEntry.class);
+                startActivityForResult(createLogEntry, REQUEST_CODE);
+            }
+        });
+
     } // end addLog() ==============================================================================
 } // end logDiaryHomepage class ====================================================================

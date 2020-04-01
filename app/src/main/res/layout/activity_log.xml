@@ -27,7 +27,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/buttonADDLOG"
+        android:id="@+id/addLogButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+ Add Log"
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <Button
-        android:id="@+id/goBackToDashboardButton"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HOME"
