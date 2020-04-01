@@ -19,7 +19,7 @@
             android:name=".createLogEntry"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".setNotifications" />
-        <activity android:name=".logHomepage" />
+        <activity android:name=".log" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

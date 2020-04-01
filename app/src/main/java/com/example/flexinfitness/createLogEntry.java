@@ -124,7 +124,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                 workoutData.putString("WORKOUT_NAME",str_workoutName);
                 workoutData.putString("WORKOUT_DATE", str_date);
                 // declare intent and pass back data
-                Intent backToLogHomepage = new Intent(this, logHomepage.class);
+                Intent backToLogHomepage = new Intent(this, log.class);
                 backToLogHomepage.putExtras(workoutData);
                 // set result & finish
                 setResult(RESULT_OK, backToLogHomepage);

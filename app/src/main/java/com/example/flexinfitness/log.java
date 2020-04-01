@@ -11,10 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import java.io.*;
 
-//start logHomepage class =====================================================================
-public class logHomepage extends AppCompatActivity implements View.OnClickListener
+//start logHomepage class ==========================================================================
+public class log extends AppCompatActivity implements View.OnClickListener
 {
     // Declare View & ViewGroup variables
     Button addLogButton;
@@ -89,7 +88,7 @@ public class logHomepage extends AppCompatActivity implements View.OnClickListen
     public void addLog(String str_workoutName, String str_workoutDate)
     {
         // create log entry & set properties
-        TextView logEntry = new TextView(logHomepage.this);
+        TextView logEntry = new TextView(log.this);
         logEntry.setId(View.generateViewId());
         logEntry.setText(str_workoutName + "      " +str_workoutDate);
         logEntry.setTextColor(Color.BLACK);
