@@ -147,13 +147,13 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         dateTextView.setText(str_date);
 
         String str_startTime = startTimeEditText.getText().toString();
-        rightStartTimeTextView.setText((str_startTime + "pm"));
+        rightStartTimeTextView.setText((str_startTime + " pm"));
 
         String str_duration = durationEditText.getText().toString();
-        rightDurationTextView.setText((str_duration + "mins"));
+        rightDurationTextView.setText((str_duration + " mins"));
 
         String str_bodyWeight = bodyWeightEditText.getText().toString();
-        rightBodyWeightTextView.setText((str_bodyWeight + "lbs"));
+        rightBodyWeightTextView.setText((str_bodyWeight + " lbs"));
 
         dateTextView.setVisibility(View.VISIBLE);
         editTextLinearLayout.setVisibility(View.GONE);

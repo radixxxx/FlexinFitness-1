@@ -17,7 +17,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
 {
     // Declare View & ViewGroup variables
     Button addLogButton;
-    Button goBackToDashboardButton;
+    Button homeButton;
 
     LinearLayout linearLayout;
 
@@ -30,7 +30,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_diary_homepage);
+        setContentView(R.layout.activity_log);
 
         // Connect View & ViewGroup variables to their XML id's
         constraintLayout = findViewById(R.id.constraintLayout);
@@ -38,11 +38,11 @@ public class log extends AppCompatActivity implements View.OnClickListener
         linearLayout = findViewById(R.id.linearLayout);
 
         addLogButton = findViewById(R.id.buttonADDLOG);
-        goBackToDashboardButton = findViewById(R.id.goBackToDashboardButton);
+        homeButton = findViewById(R.id.goBackToDashboardButton);
 
         // setting the onClick's for the buttons
         addLogButton.setOnClickListener(this);
-        goBackToDashboardButton.setOnClickListener(this);
+        homeButton.setOnClickListener(this);
     } // end onCreate() ============================================================================
 
     // start onClick() =============================================================================
