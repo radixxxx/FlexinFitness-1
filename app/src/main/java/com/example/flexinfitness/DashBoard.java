@@ -43,7 +43,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         logout = findViewById(R.id.logOutButton);
 
         name = findViewById(R.id.nameTextView);
-        logButton = findViewById(R.id.diaryButton);
+        logButton = findViewById(R.id.logButton);
         settingsButton = findViewById(R.id.settingsButton);
         workoutPlannerButton = findViewById(R.id.workoutPlannerButton);
         tutorialButton = findViewById(R.id.tutorialButton);
@@ -106,55 +106,37 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
-
-        // goes to the log activity ================================================================
-        logButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), log.class);
-                startActivity(gotoLOGDIARYHOMEPAGE);
-            }
-        }); // end LOG/DIARY button onClick ========================================================
-
-        // goes to the workoutPlanner activity =====================================================
-        workoutPlannerButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent workoutPlanner = new Intent(DashBoard.this, workoutPlanner.class);
-                startActivity(workoutPlanner);
-            }
-        }); // end workoutPlanner ==================================================================
-
-        // goes to the TUTORIAL activity ===========================================================
-        tutorialButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent tutorial = new Intent(DashBoard.this, tutorial.class);
-                startActivity(tutorial);
-            }
-        }); // end TUTORIAL activity ===============================================================
-
-        settingsButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent goToSettings = new Intent(getApplicationContext(), settingOptions.class);
-                startActivity(goToSettings);
-            }
-        });
     } // end onCreate() ============================================================================
 
     // start onClick() =============================================================================
     @Override
     public void onClick(View v)
     {
+        switch( v.getId())
+        {
+                // switch to log
+            case R.id.logButton:
+                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), log.class);
+                startActivity(gotoLOGDIARYHOMEPAGE);
+                break;
+                // switch to workout planner
+            case R.id.workoutPlannerButton:
+                Intent workoutPlanner = new Intent(DashBoard.this, workoutPlanner.class);
+                startActivity(workoutPlanner);
+                break;
+                // switch to tutorial
+            case R.id.tutorialButton:
+                Intent tutorial = new Intent(DashBoard.this, tutorial.class);
+                startActivity(tutorial);
+                break;
+                // switch to settings
+            case R.id.settingsButton:
+                Intent goToSettings = new Intent(getApplicationContext(), settingOptions.class);
+                startActivity(goToSettings);
+                break;
+            default:
+                break;
+        }
 
     } // end onClick() =============================================================================
 } // end DashBoard class ===========================================================================
