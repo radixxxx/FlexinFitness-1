@@ -147,7 +147,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         dateTextView.setText(str_date);
     } // end setInputOnTextViews() =============================================================
 
-    // start createLogEntry() ======================================================================
+    // start addExerciseToScrollView() ======================================================================
     public void addExerciseToScrollView()
     {
         // create the EditText & set the properties
@@ -162,7 +162,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
         // add the view to the layout
         scrollViewLinearLayout.addView(exerciseEntry);
-    } //end createLogEntry() ===================================================================
+    } //end addExerciseToScrollView() ===================================================================
 
     // start setOnclicks() =========================================================================
     public void  setOnclicks()

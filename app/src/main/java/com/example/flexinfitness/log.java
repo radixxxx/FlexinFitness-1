@@ -113,7 +113,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
 
                 Intent goToLogProof = new Intent(getApplicationContext(), log_proof.class);
                 goToLogProof.putExtras(workoutData);
-                startActivityForResult(goToLogProof, REQUEST_CODE);
+                startActivity(goToLogProof);
             }
         });
     } // end addLog() ==============================================================================

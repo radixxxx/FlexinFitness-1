@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 // start log_proof class ===========================================================================
@@ -15,6 +17,7 @@ public class log_proof extends AppCompatActivity
     TextView startTime_txtV;
     TextView duration_txtV;
     TextView bodyweight_txtV;
+    TextView heading_txtV;
 
     String str_workoutName;
     String str_workoutDate;
@@ -58,6 +61,7 @@ public class log_proof extends AppCompatActivity
         duration_txtV.setText(str_duration);
         startTime_txtV.setText(str_startTime);
         bodyweight_txtV.setText(str_bodyWeight);
+        heading_txtV.setText(str_workoutName);
     } // end setWorkoutData() ======================================================================
 
     // start connectViews() ========================================================================
@@ -69,5 +73,6 @@ public class log_proof extends AppCompatActivity
         startTime_txtV = findViewById(R.id.rightStartTimeTextView);
         duration_txtV = findViewById(R.id.rightDurationTextView);
         bodyweight_txtV = findViewById(R.id.rightBodyWeightTextView);
+        heading_txtV = findViewById(R.id.heading_txtV);
     } // end connectViews() ========================================================================
 } // end log_proof class
