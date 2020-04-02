@@ -143,24 +143,33 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         }
     } // end onClick() =============================================================================
 
-    // start submitValueButtonActionOne() ==========================================================
+
+    // start getInput() ============================================================================
+    public void getInput()
+    {
+        str_workoutName = workoutNameEditText.getText().toString();
+        str_date = dateEditText.getText().toString();
+        str_startTime = startTimeEditText.getText().toString();
+        str_duration = durationEditText.getText().toString();
+        str_bodyweight = bodyWeightEditText.getText().toString();
+
+        System.out.println(str_workoutName);
+        System.out.println(str_date);
+        System.out.println(str_startTime);
+        System.out.println(str_duration);
+        System.out.println(str_bodyweight);
+    } // end getInput() ============================================================================
+
+    // start submitValueButtonActionOne() ==========================================================s
     public void submitValueButtonActionOne()
     {
-        str_workoutName= workoutNameEditText.getText().toString();
+        getInput();
         rightWorkoutNameTextView.setText(str_workoutName);
-
-        str_date = dateEditText.getText().toString();
         rightDateTextView.setText(str_date);
         dateTextView.setText(str_date);
-
-        String str_startTime = startTimeEditText.getText().toString();
         rightStartTimeTextView.setText((str_startTime + " pm"));
-
-        String str_duration = durationEditText.getText().toString();
         rightDurationTextView.setText((str_duration + " mins"));
-
-        String str_bodyWeight = bodyWeightEditText.getText().toString();
-        rightBodyWeightTextView.setText((str_bodyWeight + " lbs"));
+        rightBodyWeightTextView.setText((str_bodyweight + " lbs"));
 
         dateTextView.setVisibility(View.VISIBLE);
         editTextLinearLayout.setVisibility(View.GONE);

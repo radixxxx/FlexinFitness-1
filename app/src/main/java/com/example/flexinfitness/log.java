@@ -32,12 +32,6 @@ public class log extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
-        // Connect View & ViewGroup variables to their XML id's
-        constraintLayout = findViewById(R.id.constraintLayout);
-        linearLayout = findViewById(R.id.linearLayout);
-        addLogButton = findViewById(R.id.addLogButton);
-        homeButton = findViewById(R.id.homeButton);
-
         // setting the onClick's for the buttons
         addLogButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
@@ -78,23 +72,24 @@ public class log extends AppCompatActivity implements View.OnClickListener
             String str_startTime = data.getExtras().getString("START_TIME");
             String str_duration = data.getExtras().getString("DURATION");
             String str_bodyweight = data.getExtras().getString("BODY");
+            System.out.println("made it to onAcitivityResult");
 
-            if( null !=  str_workoutDate && null != str_workoutName)
+            if( null !=  str_workoutDate && null != str_workoutName && null != str_startTime && null != str_duration && null != str_bodyweight)
             {
-                addLog(str_workoutName.toUpperCase(), str_workoutDate.toUpperCase());
+                System.out.println("if statement");
+                addLog(str_workoutName.toUpperCase(), str_workoutDate.toUpperCase(), str_startTime.toUpperCase(), str_duration.toUpperCase(), str_bodyweight.toUpperCase());
             }
             else
             {
-                addLog(str_workoutName, str_workoutDate);
+              System.out.println("else statement");
             }
         }
     } // end onActivityResult() ====================================================================
 
     // start addLog() ==============================================================================
-    public void addLog(final String str_workoutName, final String str_workoutDate)
+    public void addLog(final String str_workoutName, final String str_workoutDate, final String str_startTime, final String str_duration, final String str_bodyweight)
     {
-        // create log entry & set properties
-        TextView logEntry = new TextView(log.this);
+        TextView logEntry = new TextView(log.this);                         // creating the log entry
         logEntry.setId(View.generateViewId());
         logEntry.setText(str_workoutName + "      " +str_workoutDate);
         logEntry.setTextColor(Color.BLACK);
@@ -102,29 +97,41 @@ public class log extends AppCompatActivity implements View.OnClickListener
         logEntry.setBackgroundColor(Color.LTGRAY);
 
 
-        LinearLayout.LayoutParams llp_textView = new
+        LinearLayout.LayoutParams llp_textView = new                               // setting up parameters for the log entry
                 LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
         logEntry.setLayoutParams(llp_textView);
 
-        // add log entry to linear layout
-        linearLayout.addView(logEntry);
+        linearLayout.addView(logEntry);                                           // actually adding the log entry
 
-        // set it's onClick
         logEntry.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
-            {
-                // do to single log entry and populate it with the information we got earlier
-                Bundle workoutData = new Bundle();
+            {                                       // set the entry's onClick
+                Bundle workoutData = new Bundle();                                // in order to get the bundle that was last sent, we need to create and call getBundle()
                 workoutData.putString("WORKOUT_NAME",str_workoutName);
                 workoutData.putString("WORKOUT_DATE", str_workoutDate);
+                workoutData.putString("START_TIME", str_startTime);
+                workoutData.putString("DURATION", str_duration);
+                workoutData.putString("BODYWEIGHT", str_bodyweight);
+
                 Intent goToLogProof = new Intent(getApplicationContext(), log_proof.class);
                 goToLogProof.putExtras(workoutData);
                 startActivityForResult(goToLogProof, REQUEST_CODE);
             }
         });
     } // end addLog() ==============================================================================
+
+    // start connectViews() ========================================================================
+    public void connectViews()
+    {
+        // Connect View & ViewGroup variables to their XML id's
+        constraintLayout = findViewById(R.id.constraintLayout);
+        linearLayout = findViewById(R.id.linearLayout);
+        addLogButton = findViewById(R.id.addLogButton);
+        homeButton = findViewById(R.id.homeButton);
+
+    } // end connectViews() ====================================================================
 } // end logDiaryHomepage class ====================================================================
