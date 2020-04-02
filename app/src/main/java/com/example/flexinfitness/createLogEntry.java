@@ -92,21 +92,21 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.doneButton:
-                //prepare bundle of workout data
-                Bundle workoutData = new Bundle();
-                workoutData.putString("WORKOUT_NAME",str_workoutName);
-                workoutData.putString("WORKOUT_DATE", str_date);
-                workoutData.putString("START_TIME", str_startTime);
-                workoutData.putString("DURATION", str_duration);
-                workoutData.putString("BODY_WEIGHT", str_bodyweight);
+                    //prepare bundle of workout data
+                    Bundle workoutData = new Bundle();
+                    workoutData.putString("WORKOUT_NAME", str_workoutName);
+                    workoutData.putString("WORKOUT_DATE", str_date);
+                    workoutData.putString("START_TIME", str_startTime);
+                    workoutData.putString("DURATION", str_duration);
+                    workoutData.putString("BODY_WEIGHT", str_bodyweight);
 
-                // declare intent and put the bundle in it
-                Intent backToLogHomepage = new Intent(this, log.class);
-                backToLogHomepage.putExtras(workoutData);
+                    // declare intent and put the bundle in it
+                    Intent backToLogHomepage = new Intent(this, log.class);
+                    backToLogHomepage.putExtras(workoutData);
 
-                // set result & finish
-                setResult(RESULT_OK, backToLogHomepage);
-                finish();
+                    // set result & finish
+                    setResult(RESULT_OK, backToLogHomepage);
+                    finish();
                 break;
 
             case R.id.addExerciseButton:
