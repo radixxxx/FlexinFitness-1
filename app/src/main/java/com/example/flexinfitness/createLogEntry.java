@@ -43,6 +43,9 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     // to be used to passes back when the doneButton is clicked
     String str_workoutName;
     String str_date;
+    String str_startTime;
+    String str_duration;
+    String str_bodyweight;
 
     // to hold all of the exercises that they input
     Vector exercises = new Vector();
@@ -123,6 +126,10 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                 Bundle workoutData = new Bundle();
                 workoutData.putString("WORKOUT_NAME",str_workoutName);
                 workoutData.putString("WORKOUT_DATE", str_date);
+                workoutData.putString("START_TIME", str_startTime);
+                workoutData.putString("DURATION", str_duration);
+                workoutData.putString("BODYWEIGHT", str_bodyweight);
+
                 // declare intent and pass back data
                 Intent backToLogHomepage = new Intent(this, log.class);
                 backToLogHomepage.putExtras(workoutData);
