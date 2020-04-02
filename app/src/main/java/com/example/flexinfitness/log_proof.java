@@ -3,68 +3,71 @@ package com.example.flexinfitness;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.icu.text.SymbolTable;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 // start log_proof class ===========================================================================
 public class log_proof extends AppCompatActivity
 {
     // declaring Views & ViewGroups
-    TextView workoutName;
-    TextView date;
-    TextView startTime;
-    TextView duration;
-    TextView bodyWeight;
+    TextView workoutName_txtV;
+    TextView date_txtV;
+    TextView startTime_txtV;
+    TextView duration_txtV;
+    TextView bodyweight_txtV;
+
+    String str_workoutName;
+    String str_workoutDate;
+    String str_duration;
+    String str_startTime;
+    String str_bodyWeight;
 
     // start onCreate() ============================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_proof);
 
         connectViews();
-        getWorkoutInformation();
-
+        getWorkoutData();
+        setWorkoutData();
     } // end onCreate() ============================================================================
+
+    // start getWorkoutInformation() ===============================================================
+    public void getWorkoutData()
+    {
+        /* in order to get the bundle of information that we passed from 'log', after clicking the newly
+            created TextView, we need to declare a new intent to capture the one that we passed in
+         */
+        Intent workoutData;
+        workoutData = getIntent();
+
+        str_workoutName = workoutData.getExtras().getString("WORKOUT_NAME");
+        str_workoutDate = workoutData.getExtras().getString("WORKOUT_DATE");
+        str_duration  = workoutData.getExtras().getString("DURATION");
+        str_startTime  = workoutData.getExtras().getString("START_TIME");
+        str_bodyWeight = workoutData.getExtras().getString("BODYWEIGHT");
+    } // end getWorkoutInformation() ===============================================================
+
+    // start setWorkoutData() ======================================================================
+    public void setWorkoutData()
+    {
+        workoutName_txtV.setText(str_workoutName);
+        date_txtV.setText(str_workoutDate);
+        duration_txtV.setText(str_duration);
+        startTime_txtV.setText(str_startTime);
+        bodyweight_txtV.setText(str_bodyWeight);
+    } // end setWorkoutData() ======================================================================
 
     // start connectViews() ========================================================================
     public void connectViews()
     {
         // connecting View & ViewGroups
-        workoutName = findViewById(R.id.rightWorkoutNameTextView);
-        date = findViewById(R.id.rightDateTextView);
-        startTime = findViewById(R.id.rightStartTimeTextView);
-        duration = findViewById(R.id.rightDurationTextView);
-        bodyWeight = findViewById(R.id.rightBodyWeightTextView);
+        workoutName_txtV = findViewById(R.id.rightWorkoutNameTextView);
+        date_txtV = findViewById(R.id.rightDateTextView);
+        startTime_txtV = findViewById(R.id.rightStartTimeTextView);
+        duration_txtV = findViewById(R.id.rightDurationTextView);
+        bodyweight_txtV = findViewById(R.id.rightBodyWeightTextView);
     } // end connectViews() ========================================================================
-
-    // start getWorkoutInformation() ===============================================================
-    public void getWorkoutInformation()
-    {
-        String str_workoutName;
-        String str_workoutDate;
-        String str_duration;
-        String str_startTime;
-        String str_bodyWeight;
-
-        Intent intent;                                                          // create intent
-        intent = getIntent();                                                   // get intent received from other activity
-
-        str_workoutName = intent.getExtras().getString("WORKOUT_NAME");    // get info
-        str_workoutDate = intent.getExtras().getString("WORKOUT_DATE");
-        str_duration  = intent.getExtras().getString("DURATION");
-        str_startTime  = intent.getExtras().getString("START_TIME");
-        str_bodyWeight = intent.getExtras().getString("BODYWEIGHT");
-
-        workoutName.setText(str_workoutName);                                   // set info
-        date.setText(str_workoutDate);
-        duration.setText(str_duration);
-        startTime.setText(str_startTime);
-        bodyWeight.setText(str_bodyWeight);
-    } // end getWorkoutInformation() ===============================================================
 } // end log_proof class

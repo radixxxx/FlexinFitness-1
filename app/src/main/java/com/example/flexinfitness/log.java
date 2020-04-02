@@ -18,10 +18,16 @@ public class log extends AppCompatActivity implements View.OnClickListener
     // Declare View & ViewGroup variables
     Button addLogButton;
     Button homeButton;
-
     LinearLayout linearLayout;
-
     ConstraintLayout constraintLayout;
+
+    // data member variable
+    String str_workoutName;
+    String str_date;
+    String str_startTime;
+    String str_duration;
+    String str_bodyweight;
+
 
     public static final int REQUEST_CODE = 1;
 
@@ -32,22 +38,26 @@ public class log extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
+        connectViews();
+
         // setting the onClick's for the buttons
         addLogButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
     } // end onCreate() ============================================================================
 
+
     // start onClick() =============================================================================
     @Override
     public void onClick(View view)
     {
-        switch(view.getId())
+        switch (view.getId())
         {
             // create a log entry
             case R.id.addLogButton:
-                Intent createLogEntry = new Intent(getApplicationContext(), createLogEntry.class);
+                Intent createLogEntry = new Intent(getApplicationContext(), createLogEntry.class); // intent is to switch to 'createLogEntry'
                 startActivityForResult(createLogEntry, REQUEST_CODE);
                 break;
+            // go back to dashboard
             case R.id.homeButton:
                 Intent goBackToDashboard = new Intent(getApplicationContext(), DashBoard.class);
                 startActivity(goBackToDashboard);
@@ -57,31 +67,23 @@ public class log extends AppCompatActivity implements View.OnClickListener
 
 
     // start onActivityResult() ====================================================================
-    // input: N/A
-    // output: a bundle of information from the 'create log' functionality used to populate the text
-    //         the log
+    // program flow comes back from 'createLogEntry' class just after packing up the bundle
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        if( REQUEST_CODE == requestCode && resultCode == RESULT_OK)
+        if (REQUEST_CODE == requestCode && resultCode == RESULT_OK)
         {
-            // extract the stored data from the bundle
-            String str_workoutName = data.getExtras().getString("WORKOUT_NAME");
-            String str_workoutDate = data.getExtras().getString("WORKOUT_DATE");
-            String str_startTime = data.getExtras().getString("START_TIME");
-            String str_duration = data.getExtras().getString("DURATION");
-            String str_bodyweight = data.getExtras().getString("BODY");
+            extractDataFromBundle(data);
             System.out.println("made it to onAcitivityResult");
 
-            if( null !=  str_workoutDate && null != str_workoutName && null != str_startTime && null != str_duration && null != str_bodyweight)
+            if (null != str_date && null != str_workoutName && null != str_startTime && null != str_duration && null != str_bodyweight)
             {
                 System.out.println("if statement");
-                addLog(str_workoutName.toUpperCase(), str_workoutDate.toUpperCase(), str_startTime.toUpperCase(), str_duration.toUpperCase(), str_bodyweight.toUpperCase());
-            }
-            else
+                addLog(str_workoutName, str_date, str_startTime, str_duration, str_bodyweight);
+            } else
             {
-              System.out.println("else statement");
+                System.out.println("else statement");
             }
         }
     } // end onActivityResult() ====================================================================
@@ -89,29 +91,21 @@ public class log extends AppCompatActivity implements View.OnClickListener
     // start addLog() ==============================================================================
     public void addLog(final String str_workoutName, final String str_workoutDate, final String str_startTime, final String str_duration, final String str_bodyweight)
     {
-        TextView logEntry = new TextView(log.this);                         // creating the log entry
-        logEntry.setId(View.generateViewId());
-        logEntry.setText(str_workoutName + "      " +str_workoutDate);
-        logEntry.setTextColor(Color.BLACK);
-        logEntry.setTextSize(25);
-        logEntry.setBackgroundColor(Color.LTGRAY);
-
-
-        LinearLayout.LayoutParams llp_textView = new                               // setting up parameters for the log entry
-                LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
-        logEntry.setLayoutParams(llp_textView);
-
-        linearLayout.addView(logEntry);                                           // actually adding the log entry
+        // create a TextView and add it to the layout
+        TextView logEntry = createView();
+        linearLayout.addView(logEntry);
 
         logEntry.setOnClickListener(new View.OnClickListener()
         {
+            /* onClick for the new TextView that was defined, assigned workout values, and placed into the layout programmatically
+                upon clicking the TextView, this onClick should create another bundle of workout data and pass it to the
+                'log_proof' activity
+            */
             @Override
             public void onClick(View v)
-            {                                       // set the entry's onClick
-                Bundle workoutData = new Bundle();                                // in order to get the bundle that was last sent, we need to create and call getBundle()
-                workoutData.putString("WORKOUT_NAME",str_workoutName);
+            {
+                Bundle workoutData = new Bundle();
+                workoutData.putString("WORKOUT_NAME", str_workoutName);
                 workoutData.putString("WORKOUT_DATE", str_workoutDate);
                 workoutData.putString("START_TIME", str_startTime);
                 workoutData.putString("DURATION", str_duration);
@@ -134,4 +128,36 @@ public class log extends AppCompatActivity implements View.OnClickListener
         homeButton = findViewById(R.id.homeButton);
 
     } // end connectViews() ====================================================================
+
+    // start extractDataFromBundle() ===============================================================
+    public void extractDataFromBundle(Intent data)
+    {
+        str_workoutName = data.getExtras().getString("WORKOUT_NAME");
+        str_date = data.getExtras().getString("WORKOUT_DATE");
+        str_startTime = data.getExtras().getString("START_TIME");
+        str_duration = data.getExtras().getString("DURATION");
+        str_bodyweight = data.getExtras().getString("BODY_WEIGHT");
+
+        str_workoutName = str_workoutName.toUpperCase();
+    } // end extractDataFromBundle() ===============================================================
+
+    // start createView() ==========================================================================
+    public TextView createView()
+    {
+        TextView logEntry = new TextView(log.this);                         // creating the log entry
+        logEntry.setId(View.generateViewId());
+        logEntry.setText(str_workoutName + "      " + str_date);
+        logEntry.setTextColor(Color.BLACK);
+        logEntry.setTextSize(25);
+        logEntry.setBackgroundColor(Color.LTGRAY);
+
+
+        LinearLayout.LayoutParams llp_textView = new
+                LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        logEntry.setLayoutParams(llp_textView);
+
+        return logEntry;
+    } // end createView() ==========================================================================
 } // end logDiaryHomepage class ====================================================================

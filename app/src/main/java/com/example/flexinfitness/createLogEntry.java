@@ -12,8 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.util.Vector;
-
 public class createLogEntry extends AppCompatActivity implements View.OnClickListener
 {
     // declare View & ViewGroup variables
@@ -30,9 +28,9 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     TextView rightBodyWeightTextView;
     TextView dateTextView;
 
-    LinearLayout rightLinearLayout;
+    LinearLayout textViewLinearLayout;
     LinearLayout editTextLinearLayout;
-    LinearLayout fuckLinearLayout;
+    LinearLayout scrollViewLinearLayout;
 
     ScrollView scrollView;
 
@@ -47,9 +45,6 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     String str_duration;
     String str_bodyweight;
 
-    // to hold all of the exercises that they input
-    Vector exercises = new Vector();
-
     // start onCreate() ============================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +52,142 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_log_entry);
 
+       connectViews();
+       setOnclicks();
+    } // end onCreate() ========================================================================
+
+
+    // start onClick() =============================================================================
+    @Override
+    public void onClick(View v)
+    {
+        switch(v.getId())
+        {
+            // if they click anyone of the TextViews
+            case R.id.rightWorkoutNameTextView:
+            case R.id.rightDateTextView:
+            case R.id.rightStartTimeTextView:
+            case R.id.rightDurationTextView:
+            case R.id.rightBodyWeightTextView:
+                // make TextViews invisible, make EditTexts visible
+                textViewLinearLayout.setVisibility(View.GONE);         // TextViews invisible
+                editTextLinearLayout.setVisibility(View.VISIBLE);   // EditTexts visible
+
+                submitValuesButton.setVisibility(View.VISIBLE);     // 'submit Values' button visible
+                break;
+
+            case R.id.submitValuesButton:
+                getInputFromEditTexts();
+                setInputOnTextViews();
+
+                // make invisible EditTexts,submitValuesButton, make visible TextViews and 'addExerciseButton'
+                dateTextView.setVisibility(View.VISIBLE);
+                editTextLinearLayout.setVisibility(View.GONE);
+                textViewLinearLayout.setVisibility(View.VISIBLE);
+                submitValuesButton.setVisibility(View.GONE);
+                addExerciseButton.setVisibility(View.VISIBLE);
+
+                // populate the scrollView log with a new entry
+                addExerciseToScrollView();
+                break;
+
+            case R.id.doneButton:
+                //prepare bundle of workout data
+                Bundle workoutData = new Bundle();
+                workoutData.putString("WORKOUT_NAME",str_workoutName);
+                workoutData.putString("WORKOUT_DATE", str_date);
+                workoutData.putString("START_TIME", str_startTime);
+                workoutData.putString("DURATION", str_duration);
+                workoutData.putString("BODY_WEIGHT", str_bodyweight);
+
+                // declare intent and put the bundle in it
+                Intent backToLogHomepage = new Intent(this, log.class);
+                backToLogHomepage.putExtras(workoutData);
+
+                // set result & finish
+                setResult(RESULT_OK, backToLogHomepage);
+                finish();
+                break;
+
+            case R.id.addExerciseButton:
+                addExerciseToScrollView();
+                break;
+        }
+    } // end onClick() =============================================================================
+
+
+    // start getInputFromEditTexts() ===============================================================
+    public void getInputFromEditTexts()
+    {
+        // gets text to strings inside our member string variables
+        str_workoutName = workoutNameEditText.getText().toString();
+        str_date = dateEditText.getText().toString();
+        str_startTime = startTimeEditText.getText().toString();
+        str_duration = durationEditText.getText().toString();
+        str_bodyweight = bodyWeightEditText.getText().toString();
+
+        // debugging purposes
+        System.out.println("getInput()");
+        System.out.println(str_workoutName);
+        System.out.println(str_date);
+        System.out.println(str_startTime);
+        System.out.println(str_duration);
+        System.out.println(str_bodyweight);
+    } // end getInputFromEditTexts() ===========================================================
+
+    // start setInputOnTextViews() =================================================================
+    public void setInputOnTextViews()
+    {
+        rightWorkoutNameTextView.setText(str_workoutName);
+        rightDateTextView.setText(str_date);
+        rightStartTimeTextView.setText((str_startTime + " pm"));
+        rightDurationTextView.setText((str_duration + " mins"));
+        rightBodyWeightTextView.setText((str_bodyweight + " lbs"));
+
+        dateTextView.setText(str_date);
+    } // end setInputOnTextViews() =============================================================
+
+    // start createLogEntry() ======================================================================
+    public void addExerciseToScrollView()
+    {
+        // create the EditText & set the properties
+        EditText exerciseEntry = new EditText(createLogEntry.this);
+        exerciseEntry.setId(View.generateViewId());
+        exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        exerciseEntry.setSingleLine(false);
+        LinearLayout.LayoutParams llp_edittext = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        exerciseEntry.setLayoutParams(llp_edittext);
+
+        // add the view to the layout
+        scrollViewLinearLayout.addView(exerciseEntry);
+    } //end createLogEntry() ===================================================================
+
+    // start setOnclicks() =========================================================================
+    public void  setOnclicks()
+    {
+        // set the button's onClick's
+        submitValuesButton.setOnClickListener(this);
+        doneButton.setOnClickListener(this);
+        addExerciseButton.setOnClickListener(this);
+
+        // set the 'TextViews' onClick's
+        rightWorkoutNameTextView.setOnClickListener(this);
+        rightDateTextView.setOnClickListener(this);
+        rightStartTimeTextView.setOnClickListener(this);
+        rightDurationTextView.setOnClickListener(this);
+        rightBodyWeightTextView.setOnClickListener(this);
+
+        // set the layout's onClick's
+        textViewLinearLayout = findViewById(R.id.rightLinearLayout);
+        editTextLinearLayout = findViewById(R.id.editTextLinearLayout);
+        scrollViewLinearLayout = findViewById(R.id.fuckLinearLayout);
+    } // end connectViews() ====================================================================
+
+    // start connectViews() ========================================================================
+    public void connectViews()
+    {
         // connect View & ViewGroups to their XML's
         workoutNameEditText = findViewById(R.id.workoutNameEditText);
         dateEditText = findViewById(R.id.dateEditText);
@@ -76,141 +207,6 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         addExerciseButton = findViewById(R.id.addExerciseButton);
 
         scrollView = findViewById(R.id.scrollView);
-
-        // set the button's onClick's
-        submitValuesButton.setOnClickListener(this);
-        doneButton.setOnClickListener(this);
-        addExerciseButton.setOnClickListener(this);
-
-        // set the 'TextViews' onClick's
-        rightWorkoutNameTextView.setOnClickListener(this);
-        rightDateTextView.setOnClickListener(this);
-        rightStartTimeTextView.setOnClickListener(this);
-        rightDurationTextView.setOnClickListener(this);
-        rightBodyWeightTextView.setOnClickListener(this);
-
-        // set the layout's onClick's
-        rightLinearLayout = findViewById(R.id.rightLinearLayout);
-        editTextLinearLayout = findViewById(R.id.editTextLinearLayout);
-        fuckLinearLayout = findViewById(R.id.fuckLinearLayout);
-
-    } // end onCreate() ============================================================================
-
-    // start onClick() =============================================================================
-    @Override
-    public void onClick(View v)
-    {
-        switch(v.getId())
-        {
-            // if they click anyone of the TextViews
-            case R.id.rightWorkoutNameTextView:
-            case R.id.rightDateTextView:
-            case R.id.rightStartTimeTextView:
-            case R.id.rightDurationTextView:
-            case R.id.rightBodyWeightTextView:
-                // hide TextViews and expose the EditTexts' and submitValuesButton
-                rightLinearLayout.setVisibility(View.GONE);
-                editTextLinearLayout.setVisibility(View.VISIBLE);
-                submitValuesButton.setVisibility(View.VISIBLE);
-                break;
-            case R.id.submitValuesButton:
-                // get the input & display it on the TextViews
-                submitValueButtonActionOne();
-                // populate the scrollView log with a new entry
-                submitValueButtonActionTwo();
-                // makes the addExerciseButton visible
-                addExerciseButton.setVisibility(View.VISIBLE);
-                break;
-            case R.id.doneButton:
-                //prepare bundle of workout data
-                Bundle workoutData = new Bundle();
-                workoutData.putString("WORKOUT_NAME",str_workoutName);
-                workoutData.putString("WORKOUT_DATE", str_date);
-                workoutData.putString("START_TIME", str_startTime);
-                workoutData.putString("DURATION", str_duration);
-                workoutData.putString("BODYWEIGHT", str_bodyweight);
-
-                // declare intent and pass back data
-                Intent backToLogHomepage = new Intent(this, log.class);
-                backToLogHomepage.putExtras(workoutData);
-                // set result & finish
-                setResult(RESULT_OK, backToLogHomepage);
-                finish();
-                break;
-            case R.id.addExerciseButton:
-                addEditTextToLinearLayout();
-                break;
-        }
-    } // end onClick() =============================================================================
-
-
-    // start getInput() ============================================================================
-    public void getInput()
-    {
-        str_workoutName = workoutNameEditText.getText().toString();
-        str_date = dateEditText.getText().toString();
-        str_startTime = startTimeEditText.getText().toString();
-        str_duration = durationEditText.getText().toString();
-        str_bodyweight = bodyWeightEditText.getText().toString();
-
-        System.out.println(str_workoutName);
-        System.out.println(str_date);
-        System.out.println(str_startTime);
-        System.out.println(str_duration);
-        System.out.println(str_bodyweight);
-    } // end getInput() ============================================================================
-
-    // start submitValueButtonActionOne() ==========================================================s
-    public void submitValueButtonActionOne()
-    {
-        getInput();
-        rightWorkoutNameTextView.setText(str_workoutName);
-        rightDateTextView.setText(str_date);
-        dateTextView.setText(str_date);
-        rightStartTimeTextView.setText((str_startTime + " pm"));
-        rightDurationTextView.setText((str_duration + " mins"));
-        rightBodyWeightTextView.setText((str_bodyweight + " lbs"));
-
-        dateTextView.setVisibility(View.VISIBLE);
-        editTextLinearLayout.setVisibility(View.GONE);
-        rightLinearLayout.setVisibility(View.VISIBLE);
-        submitValuesButton.setVisibility(View.GONE);
-    } // end submitValueButtonActionOne() ==========================================================
-
-    // start submitValueButtonActionTwo() ==========================================================
-    public void submitValueButtonActionTwo()
-    {
-        // create the EditText & set the properties
-        EditText exerciseEntry = new EditText(createLogEntry.this);
-        exerciseEntry.setId(View.generateViewId());
-
-        exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-        exerciseEntry.setSingleLine(false);
-
-        LinearLayout.LayoutParams llp_edittext = new
-                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        exerciseEntry.setLayoutParams(llp_edittext);
-
-        // add the view to the layout
-        fuckLinearLayout.addView(exerciseEntry);
-    } //end submitValueButtonActionTwo() ===========================================================
-
-    // start addEditTextToLinearLayout() ===========================================================
-    public void addEditTextToLinearLayout()
-    {
-        EditText exerciseEntry = new EditText(createLogEntry.this);
-        exerciseEntry.setId(View.generateViewId());
-
-        exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-        exerciseEntry.setSingleLine(false);
-
-        LinearLayout.LayoutParams llp_edittext = new
-                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        exerciseEntry.setLayoutParams(llp_edittext);
-
-        // add the view to the layout
-        fuckLinearLayout.addView(exerciseEntry);
-    } // end addEditTextToLinearLayout() ===========================================================
+    } // end connectViews() ====================================================================
 } // end class createLogEntry ======================================================================
+
