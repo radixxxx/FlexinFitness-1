@@ -115,6 +115,22 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         }
     } // end onClick() =============================================================================
 
+    // start addExerciseToScrollView() ======================================================================
+    public void addExerciseToScrollView()
+    {
+        // create the EditText & set the properties
+        EditText exerciseEntry = new EditText(createLogEntry.this);
+        exerciseEntry.setId(View.generateViewId());
+        exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        exerciseEntry.setSingleLine(false);
+        LinearLayout.LayoutParams llp_edittext = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        exerciseEntry.setLayoutParams(llp_edittext);
+
+        // add the view to the layout
+        scrollViewLinearLayout.addView(exerciseEntry);
+    } //end addExerciseToScrollView() ===================================================================
 
     // start getInputFromEditTexts() ===============================================================
     public void getInputFromEditTexts()
@@ -146,23 +162,6 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
         dateTextView.setText(str_date);
     } // end setInputOnTextViews() =============================================================
-
-    // start addExerciseToScrollView() ======================================================================
-    public void addExerciseToScrollView()
-    {
-        // create the EditText & set the properties
-        EditText exerciseEntry = new EditText(createLogEntry.this);
-        exerciseEntry.setId(View.generateViewId());
-        exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-        exerciseEntry.setSingleLine(false);
-        LinearLayout.LayoutParams llp_edittext = new
-                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        exerciseEntry.setLayoutParams(llp_edittext);
-
-        // add the view to the layout
-        scrollViewLinearLayout.addView(exerciseEntry);
-    } //end addExerciseToScrollView() ===================================================================
 
     // start setOnclicks() =========================================================================
     public void  setOnclicks()
