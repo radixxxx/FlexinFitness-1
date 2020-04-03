@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 //start logHomepage class ==========================================================================
 public class log extends AppCompatActivity implements View.OnClickListener
 {
@@ -28,6 +30,8 @@ public class log extends AppCompatActivity implements View.OnClickListener
     String str_duration;
     String str_bodyweight;
 
+    ArrayList exerciseList = new ArrayList();
+    ArrayList exerciseEntries= new ArrayList();
 
     public static final int REQUEST_CODE = 1;
 
@@ -43,7 +47,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
         // setting the onClick's for the buttons
         addLogButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
-    } // end onCreate() ============================================================================
+    } // end onCreate() ========================================================================
 
 
     // start onClick() =============================================================================
@@ -63,8 +67,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
                 startActivity(goBackToDashboard);
                 break;
         } // end switch(view.getId()
-    } // end onClick() =============================================================================
-
+    } // end onClick() =========================================================================
 
     // start onActivityResult() ====================================================================
     // program flow comes back from 'createLogEntry' class just after packing up the bundle
@@ -86,7 +89,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
                 System.out.println("else statement");
             }
         }
-    } // end onActivityResult() ====================================================================
+    } // end onActivityResult() ================================================================
 
     // start addLog() ==============================================================================
     public void addLog(final String str_workoutName, final String str_workoutDate, final String str_startTime, final String str_duration, final String str_bodyweight)
@@ -116,7 +119,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
                 startActivity(goToLogProof);
             }
         });
-    } // end addLog() ==============================================================================
+    } // end addLog() ==========================================================================
 
     // start connectViews() ========================================================================
     public void connectViews()
@@ -138,8 +141,12 @@ public class log extends AppCompatActivity implements View.OnClickListener
         str_duration = data.getExtras().getString("DURATION");
         str_bodyweight = data.getExtras().getString("BODY_WEIGHT");
 
+        // extracting lists
+        exerciseList = data.getParcelableArrayListExtra("exercisesVector");
+        exerciseEntries = data.getParcelableArrayListExtra("exerciseEntries");
+
         str_workoutName = str_workoutName.toUpperCase();
-    } // end extractDataFromBundle() ===============================================================
+    } // end extractDataFromBundle() ===========================================================
 
     // start createView() ==========================================================================
     public TextView createView()
@@ -159,5 +166,5 @@ public class log extends AppCompatActivity implements View.OnClickListener
         logEntry.setLayoutParams(llp_textView);
 
         return logEntry;
-    } // end createView() ==========================================================================
+    } // end createView() ======================================================================a
 } // end logDiaryHomepage class ====================================================================

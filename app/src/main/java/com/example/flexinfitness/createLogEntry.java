@@ -12,6 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.net.BindException;
+import java.util.ArrayList;
+import java.util.Vector;
+
 public class createLogEntry extends AppCompatActivity implements View.OnClickListener
 {
     // declare View & ViewGroup variables
@@ -44,6 +48,16 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     String str_startTime;
     String str_duration;
     String str_bodyweight;
+
+    public class exercise
+    {
+        String workoutData = "this is empty";
+        exercise(){};
+    }
+
+    EditText exerciseEntry;
+    Vector<exercise> exercisesVector = new Vector<>();
+    Vector<EditText> exerciseEntries = new Vector<>();
 
     // start onCreate() ============================================================================
     @Override
@@ -92,6 +106,9 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.doneButton:
+                // get exercise information
+                getExerciseInfo();
+
                     //prepare bundle of workout data
                     Bundle workoutData = new Bundle();
                     workoutData.putString("WORKOUT_NAME", str_workoutName);
@@ -103,7 +120,6 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                     // declare intent and put the bundle in it
                     Intent backToLogHomepage = new Intent(this, log.class);
                     backToLogHomepage.putExtras(workoutData);
-
                     // set result & finish
                     setResult(RESULT_OK, backToLogHomepage);
                     finish();
@@ -119,7 +135,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     public void addExerciseToScrollView()
     {
         // create the EditText & set the properties
-        EditText exerciseEntry = new EditText(createLogEntry.this);
+        exerciseEntry = new EditText(createLogEntry.this);
         exerciseEntry.setId(View.generateViewId());
         exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         exerciseEntry.setSingleLine(false);
@@ -130,7 +146,22 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
 
         // add the view to the layout
         scrollViewLinearLayout.addView(exerciseEntry);
+        exerciseEntries.add(exerciseEntry);
+        exercise first = new exercise();
+        exercisesVector.add(first);
     } //end addExerciseToScrollView() ===================================================================
+
+
+    // start getExerciseInfo() =====================================================================
+    public void getExerciseInfo()
+    {
+        for(int index=0; index<exercisesVector.size(); ++index)
+        {
+            exercisesVector.get(index).workoutData = exerciseEntries.get(index).getText().toString();
+            System.out.println(exercisesVector.get(index).workoutData);
+        }
+    } // end getExerciseInfo() =====================================================================
+
 
     // start getInputFromEditTexts() ===============================================================
     public void getInputFromEditTexts()
