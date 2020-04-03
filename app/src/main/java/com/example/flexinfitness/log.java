@@ -31,7 +31,8 @@ public class log extends AppCompatActivity implements View.OnClickListener
     String str_bodyweight;
 
     ArrayList exerciseList = new ArrayList();
-    ArrayList exerciseEntries= new ArrayList();
+    ArrayList exerciseEntries = new ArrayList();
+    ArrayList<String>   list;
 
     public static final int REQUEST_CODE = 1;
 
@@ -114,8 +115,10 @@ public class log extends AppCompatActivity implements View.OnClickListener
                 workoutData.putString("DURATION", str_duration);
                 workoutData.putString("BODYWEIGHT", str_bodyweight);
 
+
                 Intent goToLogProof = new Intent(getApplicationContext(), log_proof.class);
                 goToLogProof.putExtras(workoutData);
+                System.out.println("FUCK YOU FRANCO");
                 startActivity(goToLogProof);
             }
         });
@@ -144,6 +147,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
         // extracting lists
         exerciseList = data.getParcelableArrayListExtra("exercisesVector");
         exerciseEntries = data.getParcelableArrayListExtra("exerciseEntries");
+        ArrayList<String>   list = data.getStringArrayListExtra("list");
 
         str_workoutName = str_workoutName.toUpperCase();
     } // end extractDataFromBundle() ===========================================================

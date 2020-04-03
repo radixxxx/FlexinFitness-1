@@ -58,6 +58,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
     EditText exerciseEntry;
     Vector<exercise> exercisesVector = new Vector<>();
     Vector<EditText> exerciseEntries = new Vector<>();
+    ArrayList<String> list = new ArrayList<>();
 
     // start onCreate() ============================================================================
     @Override
@@ -116,10 +117,12 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                     workoutData.putString("START_TIME", str_startTime);
                     workoutData.putString("DURATION", str_duration);
                     workoutData.putString("BODY_WEIGHT", str_bodyweight);
+                    workoutData.putStringArrayList("list", list);
 
                     // declare intent and put the bundle in it
                     Intent backToLogHomepage = new Intent(this, log.class);
                     backToLogHomepage.putExtras(workoutData);
+
                     // set result & finish
                     setResult(RESULT_OK, backToLogHomepage);
                     finish();
@@ -158,10 +161,17 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
         for(int index=0; index<exercisesVector.size(); ++index)
         {
             exercisesVector.get(index).workoutData = exerciseEntries.get(index).getText().toString();
-            System.out.println(exercisesVector.get(index).workoutData);
+
+            list.add(exerciseEntries.get(index).getText().toString());
+        }
+
+        // displaying the list while in 'createLogEntry' in order to check if the list has been populated
+        System.out.println(" ");
+        for(int index2=0;index2<list.size();++index2)
+        {
+            System.out.println(list.get(index2));
         }
     } // end getExerciseInfo() =====================================================================
-
 
     // start getInputFromEditTexts() ===============================================================
     public void getInputFromEditTexts()

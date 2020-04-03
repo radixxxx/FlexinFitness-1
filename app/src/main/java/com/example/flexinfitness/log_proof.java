@@ -4,9 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Vector;
 
 // start log_proof class ===========================================================================
 public class log_proof extends AppCompatActivity
@@ -25,6 +31,11 @@ public class log_proof extends AppCompatActivity
     String str_startTime;
     String str_bodyWeight;
 
+    LinearLayout scrollViewLinearLayout;
+
+    ArrayList<String>   list = new ArrayList<>();
+    Vector<EditText>    exercisesEditTextVector = new Vector<>();
+
     // start onCreate() ============================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,6 +46,8 @@ public class log_proof extends AppCompatActivity
         connectViews();
         getWorkoutData();
         setWorkoutData();
+        createTextViews();
+        populateExercises();
     } // end onCreate() ============================================================================
 
     // start getWorkoutInformation() ===============================================================
@@ -51,6 +64,9 @@ public class log_proof extends AppCompatActivity
         str_duration  = workoutData.getExtras().getString("DURATION");
         str_startTime  = workoutData.getExtras().getString("START_TIME");
         str_bodyWeight = workoutData.getExtras().getString("BODYWEIGHT");
+
+        list = workoutData.getExtras().getStringArrayList("list");
+        System.out.println(list);
     } // end getWorkoutInformation() ===============================================================
 
     // start setWorkoutData() ======================================================================
@@ -62,7 +78,39 @@ public class log_proof extends AppCompatActivity
         startTime_txtV.setText(str_startTime);
         bodyweight_txtV.setText(str_bodyWeight);
         heading_txtV.setText(str_workoutName);
-    } // end setWorkoutData() ======================================================================
+
+
+    } // end setWorkoutData() ==================================================================
+
+
+    /// THIS FUCNTION IS NEW========================================================================
+    // start populateExercises() ===================================================================
+    public void createTextViews()
+    {
+        for(int index=0;index< list.size();++index)
+        {
+            // create the EditText & set the properties
+            EditText exerciseEntry = new EditText(log_proof.this);
+            exerciseEntry.setId(View.generateViewId());
+            exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+            exerciseEntry.setSingleLine(false);
+            LinearLayout.LayoutParams llp_edittext = new
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            exerciseEntry.setLayoutParams(llp_edittext);
+
+            scrollViewLinearLayout.addView(exerciseEntry);
+            exercisesEditTextVector.add(exerciseEntry);
+        }
+    } // end populateExercises() ===================================================================
+
+
+    // start populateExercises() ===================================================================
+    public void populateExercises()
+    {
+
+    } // end populateExercises() ===================================================================
+
 
     // start connectViews() ========================================================================
     public void connectViews()
@@ -74,5 +122,6 @@ public class log_proof extends AppCompatActivity
         duration_txtV = findViewById(R.id.rightDurationTextView);
         bodyweight_txtV = findViewById(R.id.rightBodyWeightTextView);
         heading_txtV = findViewById(R.id.heading_txtV);
+        scrollViewLinearLayout = findViewById(R.id.fuckLinearLayout);
     } // end connectViews() ========================================================================
 } // end log_proof class
