@@ -24,6 +24,7 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="4dp"
                 android:autoSizeTextType="uniform"
+                android:textColor="#000000"
                 android:text="@string/name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
@@ -36,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/logout"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/settings">
 
             </Button>
         </LinearLayout>
@@ -83,7 +82,7 @@
                 android:layout_width="62dp"
                 android:layout_height="62dp"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/icons_android_studio" />
 
         </RelativeLayout>
 
@@ -112,7 +111,7 @@
                     android:padding="16dp">
 
                     <Button
-                        android:id="@+id/diaryButton"
+                        android:id="@+id/logButton"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="12dp"

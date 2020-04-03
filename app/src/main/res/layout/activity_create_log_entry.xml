@@ -121,7 +121,7 @@
 
             <TextView
                 android:id="@+id/leftWorkoutNameTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/workout_name_create_log"
                 android:textColor="#000000"

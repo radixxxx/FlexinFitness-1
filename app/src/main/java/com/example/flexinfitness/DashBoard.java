@@ -18,42 +18,53 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class DashBoard extends AppCompatActivity {
-
+// start DashBoard class ===========================================================================
+public class DashBoard extends AppCompatActivity implements View.OnClickListener
+{
     // declaring the View & ViewGroups
-    Button logOut;
-    Button diary;
-    Button settings;
+    Button logout;
+    Button logButton;
+    Button settingsButton;
     Button workoutPlannerButton;
     Button tutorialButton;
 
     TextView name;
 
+    // start 0nCreate() ============================================================================
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        // connecting Views & ViewGroups to their XMLs
-        logOut = findViewById(R.id.logOutButton);
-        // diary == logButton lol I need to go back and change this
-        diary = findViewById(R.id.diaryButton);
+        // connecting Views & ViewGroups to their XML ids
+        logout = findViewById(R.id.logOutButton);
         name = findViewById(R.id.nameTextView);
-        settings = findViewById(R.id.settingsButton);
+        logButton = findViewById(R.id.logButton);
+        settingsButton = findViewById(R.id.settingsButton);
         workoutPlannerButton = findViewById(R.id.workoutPlannerButton);
         tutorialButton = findViewById(R.id.tutorialButton);
 
+        // set the onClicks
+        logButton.setOnClickListener(this);
+        settingsButton.setOnClickListener(this);
+        workoutPlannerButton.setOnClickListener(this);
+        tutorialButton.setOnClickListener(this);
+
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
-        if(signInAccount != null){
+        if (signInAccount != null)
+        {
             // Retrieves user info to display.
             name.setText(signInAccount.getDisplayName());
 
             // Listens for a click on the sign out button.
-            logOut.setOnClickListener(new View.OnClickListener() {
+            logout.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     final GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
                             .requestIdToken(getString(R.string.default_web_client_id))
                             .requestEmail()
@@ -65,17 +76,21 @@ public class DashBoard extends AppCompatActivity {
                     // Signs out if firebase client
                     mAuth.signOut();
                     // Attempts to sign out of google client and listens for a success or failure
-                    signInClient.signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    signInClient.signOut().addOnSuccessListener(new OnSuccessListener<Void>()
+                    {
                         @Override
-                        public void onSuccess(Void aVoid) {
+                        public void onSuccess(Void aVoid)
+                        {
                             Toast.makeText(DashBoard.this, signInAccount.getEmail() + " Logged out Successfull!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
+                    }).addOnFailureListener(new OnFailureListener()
+                    {
                         @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(DashBoard.this, signInAccount.getEmail()+ " Failed to log out!", Toast.LENGTH_SHORT).show();
+                        public void onFailure(@NonNull Exception e)
+                        {
+                            Toast.makeText(DashBoard.this, signInAccount.getEmail() + " Failed to log out!", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -83,52 +98,44 @@ public class DashBoard extends AppCompatActivity {
                 }
             });
         }
-        // If they're in the application without beng logged into, send them to the login screen.
-        else{
+        // If they're in the application without being logged into, send them to the login screen.
+        else
+        {
             mAuth.signOut();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
+    } // end onCreate() ============================================================================
 
-        // goes to the log activity ================================================================
-        diary.setOnClickListener(new View.OnClickListener()
+    // start onClick() =============================================================================
+    @Override
+    public void onClick(View v)
+    {
+        switch( v.getId())
         {
-            @Override
-            public void onClick(View v)
-            {
-                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), logHomepage.class);
+                // switch to log
+            case R.id.logButton:
+                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), log.class);
                 startActivity(gotoLOGDIARYHOMEPAGE);
-            }
-        }); // end LOG/DIARY button onClick ========================================================
-
-        // goes to the workoutPlanner activity =====================================================
-        workoutPlannerButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
+                break;
+                // switch to workout planner
+            case R.id.workoutPlannerButton:
                 Intent workoutPlanner = new Intent(DashBoard.this, workoutPlanner.class);
                 startActivity(workoutPlanner);
-            }
-        }); // end workoutPlanner ==================================================================
-
-        // goes to the TUTORIAL activity ===========================================================
-        tutorialButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
+                break;
+                // switch to tutorial
+            case R.id.tutorialButton:
                 Intent tutorial = new Intent(DashBoard.this, tutorial.class);
                 startActivity(tutorial);
-            }
-        }); // end TUTORIAL activity ===============================================================
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+                // switch to settings
+            case R.id.settingsButton:
                 Intent goToSettings = new Intent(getApplicationContext(), settingOptions.class);
                 startActivity(goToSettings);
-            }
-        });
-    }
-}
+                break;
+            default:
+                break;
+        }
+
+    } // end onClick() =============================================================================
+} // end DashBoard class ===========================================================================

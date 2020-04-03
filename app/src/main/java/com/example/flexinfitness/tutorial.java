@@ -14,7 +14,7 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
     // declare View & ViewGroups
     Button playPushUps, playCrunches, playSquats, playLunges;
 
-    VideoView videoView1, videoView2, videoView3, videoView4;
+    VideoView pushups_video, crunches_video, squats_video, lunges_video;
 
     MediaController mediaController;
 
@@ -31,10 +31,10 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
         playSquats = findViewById(R.id.squatsButton);
         playLunges = findViewById(R.id.lungesButton);
 
-        videoView1 = findViewById(R.id.webView1);
-        videoView2 = findViewById(R.id.webView2);
-        videoView3 = findViewById(R.id.webView3);
-        videoView4 = findViewById(R.id.webView4);
+        pushups_video = findViewById(R.id.webView1);
+        crunches_video = findViewById(R.id.webView2);
+        squats_video = findViewById(R.id.webView3);
+        lunges_video = findViewById(R.id.webView4);
 
         // setting their onClicks
         playPushUps.setOnClickListener(this);
@@ -71,14 +71,14 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
     {
         mediaController = new MediaController(this);
 
-        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.software_engineering_video;
+        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.pushups_video_final;
         Uri uri = Uri.parse(pathToVideo);
-        videoView1.setVideoURI(uri);
-        videoView1.requestFocus();
-        videoView1.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView1);
+        pushups_video.setVideoURI(uri);
+        pushups_video.requestFocus();
+        pushups_video.setMediaController(mediaController);
+        mediaController.setAnchorView(pushups_video);
 
-        videoView1.start();
+        pushups_video.start();
     } // end playVideo() ===========================================================================
 
     // start playVideo() ===========================================================================
@@ -86,14 +86,14 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
     {
         mediaController = new MediaController(this);
 
-        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.software_engineering_video;
+        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.crunches_video_final;
         Uri uri = Uri.parse(pathToVideo);
-        videoView2.setVideoURI(uri);
-        videoView2.requestFocus();
-        videoView2.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView2);
+        crunches_video.setVideoURI(uri);
+        crunches_video.requestFocus();
+        crunches_video.setMediaController(mediaController);
+        mediaController.setAnchorView(crunches_video);
 
-        videoView2.start();
+        crunches_video.start();
     } // end playVideo() ===========================================================================
 
     // start playVideo() ===========================================================================
@@ -101,14 +101,14 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
     {
         mediaController = new MediaController(this);
 
-        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.software_engineering_video;
+        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.squat_video_final;
         Uri uri = Uri.parse(pathToVideo);
-        videoView3.setVideoURI(uri);
-        videoView3.requestFocus();
-        videoView3.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView3);
+        squats_video.setVideoURI(uri);
+        squats_video.requestFocus();
+        squats_video.setMediaController(mediaController);
+        mediaController.setAnchorView(squats_video);
 
-        videoView3.start();
+        squats_video.start();
     } // end playVideo() ===========================================================================
 
     // start playVideo() ===========================================================================
@@ -116,14 +116,14 @@ public class tutorial extends AppCompatActivity implements View.OnClickListener
     {
         mediaController = new MediaController(this);
 
-        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.software_engineering_video;
+        String pathToVideo = "android.resource://com.example.flexinfitness/" + R.raw.lunges_video_final;
         Uri uri = Uri.parse(pathToVideo);
-        videoView4.setVideoURI(uri);
-        videoView4.requestFocus();
-        videoView4.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView4);
+        lunges_video.setVideoURI(uri);
+        lunges_video.requestFocus();
+        lunges_video.setMediaController(mediaController);
+        mediaController.setAnchorView(lunges_video);
 
-        videoView4.start();
+        lunges_video.start();
     } // end playVideo() ===========================================================================
 
 } // end tutorial class ============================================================================

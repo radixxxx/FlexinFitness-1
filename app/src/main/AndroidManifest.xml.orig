@@ -11,12 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <<<<<<< HEAD
-        <activity android:name=".CreateNotifications"></activity>
+        <activity android:name=".activity_tutorial"></activity>
 =======
-        <activity android:name=".createLogEntry"
-                  android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".logHomepage"/>
->>>>>>> 0ed8dd09b77825b22eeadc3ef9f5ad0b48faee4e
+        <activity android:name=".log_proof"></activity>
+>>>>>>> 462fd221d8ed7ec8c44beb2775e4e564631679fb
+        <activity android:name=".tutorial" />
+        <activity
+            android:name=".workoutPlanner"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".settingOptions" />
+        <activity
+            android:name=".createLogEntry"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".setNotifications" />
+        <activity android:name=".log" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
