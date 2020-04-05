@@ -18,19 +18,21 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-// start DashBoard class ===========================================================================
+// region DashBoard class ===========================================================================
 public class DashBoard extends AppCompatActivity implements View.OnClickListener
 {
-    // declaring the View & ViewGroups
+    // region View & ViewGroups
     Button logout;
     Button logButton;
     Button settingsButton;
     Button workoutPlannerButton;
     Button tutorialButton;
+    Button btnShare;
 
     TextView name;
+    // endregion
 
-    // start 0nCreate() ============================================================================
+    // region 0nCreate() ============================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -39,21 +41,26 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        // connecting Views & ViewGroups to their XML ids
+        // region Connecting Views & ViewGroups
         logout = findViewById(R.id.logOutButton);
         name = findViewById(R.id.nameTextView);
         logButton = findViewById(R.id.logButton);
         settingsButton = findViewById(R.id.settingsButton);
         workoutPlannerButton = findViewById(R.id.workoutPlannerButton);
         tutorialButton = findViewById(R.id.tutorialButton);
+        btnShare = findViewById(R.id.btnShare);
+        // endregion
 
-        // set the onClicks
+        // region Setting OnClicks;
         logButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
         workoutPlannerButton.setOnClickListener(this);
         tutorialButton.setOnClickListener(this);
+        btnShare.setOnClickListener(this);
+        // endregion
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+
         if (signInAccount != null)
         {
             // Retrieves user info to display.
@@ -64,7 +71,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             {
                 @Override
                 public void onClick(View v)
-                {
+                {// connecting Views & ViewGroups to their XML ids
                     final GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
                             .requestIdToken(getString(R.string.default_web_client_id))
                             .requestEmail()
@@ -105,9 +112,9 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
-    } // end onCreate() ============================================================================
+    } // endregion onCreate() ============================================================================
 
-    // start onClick() =============================================================================
+    // region onClick() =============================================================================
     @Override
     public void onClick(View v)
     {
@@ -133,9 +140,12 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 Intent goToSettings = new Intent(getApplicationContext(), settingOptions.class);
                 startActivity(goToSettings);
                 break;
+                // switch to share
+            case R.id.btnShare:
+                Intent goToShare = new Intent(DashBoard.this, facebook.class);
+                startActivity(goToShare);
             default:
                 break;
         }
-
-    } // end onClick() =============================================================================
-} // end DashBoard class ===========================================================================
+    } // endregion onClick() =============================================================================
+} // endregion DashBoard class ===========================================================================
