@@ -2,4 +2,9 @@
     <string name="app_name">FlexinFitness</string>
     <string name="name">name</string>
     <string name="email">email</string>
+
+    <!-- facebook shit-->
+    <string name="facebook_app_id">216751262760250</string>
+    <string name="facebook_login_protocol_scheme">fb216751262760250</string>
+
 </resources>

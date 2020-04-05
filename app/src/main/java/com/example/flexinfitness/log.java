@@ -5,13 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 //start logHomepage class ==========================================================================
@@ -170,5 +177,5 @@ public class log extends AppCompatActivity implements View.OnClickListener
         logEntry.setLayoutParams(llp_textView);
 
         return logEntry;
-    } // end createView() ======================================================================a
+    } // end createView() ======================================================================
 } // end logDiaryHomepage class ====================================================================
