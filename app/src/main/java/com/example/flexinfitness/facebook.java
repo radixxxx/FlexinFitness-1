@@ -2,14 +2,25 @@ package com.example.flexinfitness;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -25,6 +36,10 @@ import com.facebook.share.model.ShareVideoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.io.File;
+import java.util.ArrayList;
+
 // region facebook class ===========================================================================
 public class facebook extends AppCompatActivity implements View.OnClickListener
 {
@@ -32,6 +47,20 @@ public class facebook extends AppCompatActivity implements View.OnClickListener
     Button btnShareLink;
     Button btnSharePhoto;
     Button btnShareVideo;
+
+    // region image from camera
+    Button btnTakePhoto;
+    private static final int CAMERA_TAKE_REQUEST = 200;
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    private ImageView imageView;
+    File file;
+    Uri uri;
+    private Context context;
+    private Activity activity;
+    ArrayList<String> permissions = new ArrayList<>();
+    ArrayList<String> permissionsToRequest;
+    ArrayList<String> permissionsRejected = new ArrayList<>();
+    // endregion image from camera
 
     CallbackManager callbackManager;
 
@@ -66,7 +95,7 @@ public class facebook extends AppCompatActivity implements View.OnClickListener
         }
     }; // endregion Target class definition
 
-    int REQUEST_VIDEO_CODE = 1000;
+    //int REQUEST_VIDEO_CODE = 1000;
 
     // region OnCreate() ==============================================================================
     @Override
@@ -77,15 +106,25 @@ public class facebook extends AppCompatActivity implements View.OnClickListener
 
         FacebookSdk.sdkInitialize(facebook.this);
 
-        //connecting views
+        // region Connection Views & Setting onClicks
         btnShareLink = findViewById(R.id.btnShareLink);
         btnSharePhoto = findViewById(R.id.btnSharePhoto);
         btnShareVideo = findViewById(R.id.btnShareVideo);
+        btnTakePhoto = findViewById(R.id.btnTakePhoto);
 
-        // setting onclicks
         btnSharePhoto.setOnClickListener(this);
         btnShareLink.setOnClickListener(this);
         btnShareVideo.setOnClickListener(this);
+        // endregion Connection Views & Setting onClicks
+
+        // region image from camera
+        imageView = findViewById(R.id.ImageView);
+        context = this;
+        activity = facebook.this;
+        permissions.add(Manifest.permission.CAMERA);
+        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        permissionsToRequest = findUnAskedPermissions(permissions);
+        // endregion image from camera
 
         // initialize FB
         callbackManager = CallbackManager.Factory.create();
@@ -133,7 +172,7 @@ public class facebook extends AppCompatActivity implements View.OnClickListener
             break;
             // endregion btnShareLink
 
-
+            /*
             // region btnSharePhoto
             case R.id.btnSharePhoto:
                 // region MY ATTEMPT
@@ -176,8 +215,8 @@ public class facebook extends AppCompatActivity implements View.OnClickListener
 
             break;
             // endregion btnSharePhoto
-
-
+            */
+            /*
             // region btnShareVideo
             case R.id.btnShareVideo:
                 Intent idk =  new Intent();
@@ -188,6 +227,7 @@ public class facebook extends AppCompatActivity implements View.OnClickListener
                 startActivityForResult(Intent.createChooser(idk, "Select Video"), REQUEST_VIDEO_CODE);
                 break;
             // endregion btnShareVideo
+             */
             default:
                 System.out.println("FUCK YOU FRANCO");
                 break;
@@ -195,6 +235,7 @@ public class facebook extends AppCompatActivity implements View.OnClickListener
         }
     }// endregion onClick() ========================================================================
 
+    /*
     // region onActivityResult() ===================================================================
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
@@ -222,5 +263,131 @@ public class facebook extends AppCompatActivity implements View.OnClickListener
     }
 
     // endregion onActivityResult() ================================================================
+     */
+
+    // region image from camera
+    // region take()
+    @TargetApi(Build.VERSION_CODES.M)
+    public void take(View v) {
+        if(checkCameraExists()) {
+            if (permissionsToRequest.size() > 0) {
+                requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]),
+                        ALL_PERMISSIONS_RESULT);
+            } else {
+                Toast.makeText(context,"Permissions already granted.", Toast.LENGTH_LONG).show();
+                launchCamera();
+            }
+        } else {
+            Toast.makeText(activity, "Camera not available.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    // endregion take()
+
+    public boolean checkCameraExists() {
+        return activity.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
+    }
+
+    // region launchCamera()
+    private void launchCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+        file = new File(Environment.getExternalStorageDirectory(), String.valueOf(System.currentTimeMillis()) + ".jpg");
+        uri = FileProvider.getUriForFile(activity, activity.getApplicationContext().getPackageName() + ".provider", file);
+        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uri);
+
+        startActivityForResult(intent, CAMERA_TAKE_REQUEST);
+    }
+    // endregion launchCamera()
+
+    // region onActivityResult()
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode)
+        {
+            case CAMERA_TAKE_REQUEST:
+                imageView.setImageURI(Uri.parse(file.toURI().toString()));
+                break;
+        }
+    }
+    // endregion onActivityResult()
+
+    // region findUnaskedPermissions
+    private ArrayList findUnAskedPermissions(ArrayList<String> wanted) {
+        ArrayList result = new ArrayList();
+
+        for (String perm : wanted) {
+            if (!hasPermission(perm)) {
+                result.add(perm);
+            }
+        }
+
+        return result;
+    }
+    // endregion findUnaskedPermissions
+
+    private boolean hasPermission(String permission) {
+        if (canAskPermission()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+            }
+        }
+        return true;
+    }
+
+    private boolean canAskPermission() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+    // region onRequestPermissionResult
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case ALL_PERMISSIONS_RESULT:
+                for (String perms : permissionsToRequest) {
+                    if (!hasPermission(perms)) {
+                        permissionsRejected.add(perms);
+                    }
+                }
+
+                if (permissionsRejected.size() > 0) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
+                            String msg = "These permissions are mandatory for the application. Please allow access.";
+                            showMessageOKCancel(msg,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermissions(permissionsRejected.toArray(
+                                                        new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
+                                            }
+                                        }
+                                    });
+                            return;
+                        }
+                    }
+                } else {
+                    Toast.makeText(context, "Permissions garanted.", Toast.LENGTH_LONG).show();
+                    launchCamera();
+                }
+                break;
+        }
+    }
+    // endregion onRequestPermissionResult
+
+    // region showMessageOKcancel
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(activity)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+    // endregion showMessageOKcancel
+    // endregion image from camera
 
 } // endregion facebook class=======================================================================
