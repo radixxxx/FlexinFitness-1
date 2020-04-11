@@ -18,19 +18,22 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-// start DashBoard class ===========================================================================
+// region DashBoard class ===========================================================================
 public class DashBoard extends AppCompatActivity implements View.OnClickListener
 {
-    // declaring the View & ViewGroups
+    // region Views/ViewGroups/Variables
     Button logout;
-    Button logButton;
-    Button settingsButton;
-    Button workoutPlannerButton;
-    Button tutorialButton;
+    Button btn_log;
+    Button btn_settings;
+    Button btn_workoutPlanner;
+    Button btn_tutorials;
+    Button btn_camera;
 
-    TextView name;
+    TextView txtV_name;
+    // endregion Views/ViewGroups/Variables
 
-    // start 0nCreate() ============================================================================
+
+    // region 0nCreate() ============================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -39,25 +42,29 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+        // region connect & set onClicks()
         // connecting Views & ViewGroups to their XML ids
         logout = findViewById(R.id.logOutButton);
-        name = findViewById(R.id.nameTextView);
-        logButton = findViewById(R.id.logButton);
-        settingsButton = findViewById(R.id.settingsButton);
-        workoutPlannerButton = findViewById(R.id.workoutPlannerButton);
-        tutorialButton = findViewById(R.id.tutorialButton);
+        txtV_name = findViewById(R.id.nameTextView);
+        btn_log = findViewById(R.id.btn_log);
+        btn_settings = findViewById(R.id.btn_settings);
+        btn_workoutPlanner = findViewById(R.id.btn_workoutPlanner);
+        btn_tutorials = findViewById(R.id.btn_tutorials);
+        btn_camera = findViewById(R.id.btn_camera);
 
         // set the onClicks
-        logButton.setOnClickListener(this);
-        settingsButton.setOnClickListener(this);
-        workoutPlannerButton.setOnClickListener(this);
-        tutorialButton.setOnClickListener(this);
+        btn_log.setOnClickListener(this);
+        btn_settings.setOnClickListener(this);
+        btn_workoutPlanner.setOnClickListener(this);
+        btn_tutorials.setOnClickListener(this);
+        btn_camera.setOnClickListener(this);
+        // endregion connect & set onClicks()
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (signInAccount != null)
         {
             // Retrieves user info to display.
-            name.setText(signInAccount.getDisplayName());
+            txtV_name.setText(signInAccount.getDisplayName());
 
             // Listens for a click on the sign out button.
             logout.setOnClickListener(new View.OnClickListener()
@@ -105,37 +112,42 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
-    } // end onCreate() ============================================================================
+    } // endregion onCreate() ============================================================================
 
-    // start onClick() =============================================================================
+    // region onClick() ============================================================================
     @Override
     public void onClick(View v)
     {
         switch( v.getId())
         {
                 // switch to log
-            case R.id.logButton:
+            case R.id.btn_log:
                 Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), log.class);
                 startActivity(gotoLOGDIARYHOMEPAGE);
                 break;
                 // switch to workout planner
-            case R.id.workoutPlannerButton:
+            case R.id.btn_workoutPlanner:
                 Intent workoutPlanner = new Intent(DashBoard.this, workoutPlanner.class);
                 startActivity(workoutPlanner);
                 break;
                 // switch to tutorial
-            case R.id.tutorialButton:
+            case R.id.btn_tutorials:
                 Intent tutorial = new Intent(DashBoard.this, tutorial.class);
                 startActivity(tutorial);
                 break;
                 // switch to settings
-            case R.id.settingsButton:
+            case R.id.btn_settings:
                 Intent goToSettings = new Intent(getApplicationContext(), settingOptions.class);
                 startActivity(goToSettings);
+                break;
+                // switch to camera
+            case R.id.btn_camera:
+                Intent goToCamera = new Intent(DashBoard.this, camera.class);
+                startActivity(goToCamera);
                 break;
             default:
                 break;
         }
 
-    } // end onClick() =============================================================================
-} // end DashBoard class ===========================================================================
+    } // endregion onClick() =============================================================================
+} // endregion DashBoard class ===========================================================================

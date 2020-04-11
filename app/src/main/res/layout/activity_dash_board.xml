@@ -37,14 +37,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/home"/>
 
             <Button
-                android:id="@+id/settingsButton"
+                android:id="@+id/btn_settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"/>
+                android:layout_marginEnd="16dp"
+                android:text="@string/settings"/>
         </LinearLayout>
 
 
@@ -109,7 +111,7 @@
                     android:padding="16dp">
 
                     <Button
-                        android:id="@+id/logButton"
+                        android:id="@+id/btn_log"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="12dp"
@@ -167,7 +169,7 @@
                     android:padding="16dp">
 
                     <Button
-                        android:id="@+id/workoutPlannerButton"
+                        android:id="@+id/btn_workoutPlanner"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="12dp"
@@ -199,7 +201,7 @@
                     android:padding="16dp">
 
                     <Button
-                        android:id="@+id/tutorialButton"
+                        android:id="@+id/btn_tutorials"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="12dp"
@@ -229,15 +231,16 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <Button
+                        android:id="@+id/btn_camera"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="12dp"
                         android:src="@drawable/ic_launcher_background"
-                        android:text="@string/functionality"
+                        android:text="@string/camera"
                         android:textColor="#000000">
 
-                    </TextView>
+                    </Button>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
