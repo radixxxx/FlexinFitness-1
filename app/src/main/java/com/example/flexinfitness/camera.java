@@ -17,9 +17,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -27,7 +31,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-// region camera class ==================================================================
+// region camera class =============================================================================
 public class camera extends AppCompatActivity implements View.OnClickListener
 {
     private static final int CAPTURE_REQUEST_CODE = 5;
@@ -37,8 +41,11 @@ public class camera extends AppCompatActivity implements View.OnClickListener
     // region Views & ViewGroups
     String currentPhotoPath;
     Button btn_takePicture;
-    ImageView imageView;
+    Button btn_addExercise;
+    ImageView imgV_picture;
+    LinearLayout scrollViewLinearLayout;
     // endregion
+
 
     // region onCreate() ===========================================================================
     @Override
@@ -50,10 +57,12 @@ public class camera extends AppCompatActivity implements View.OnClickListener
         // region connect & set onClicks()
         // connect views
         btn_takePicture = findViewById(R.id.btn_takePicture);
-        imageView = findViewById(R.id.imgV_pictureTaken);
-
+        imgV_picture = findViewById(R.id.imgV_picture);
+        btn_addExercise = findViewById(R.id.btn_addExercise);
+        scrollViewLinearLayout = findViewById(R.id.scrollViewLinearLayout);
         // set onClick()
         btn_takePicture.setOnClickListener(this);
+        btn_addExercise.setOnClickListener(this);
         // endregion connect & set onClicks()
     } // endregion onCreate() ======================================================================
 
@@ -76,13 +85,16 @@ public class camera extends AppCompatActivity implements View.OnClickListener
                     // permissions already granted, so take the picture
                     takePicture();
                 break;
+            case R.id.btn_addExercise:
+                    addExercise();
+                break;
 
             default:
                 break;
         }
     }// endregion onClick() ========================================================================
 
-
+    // region camera shit
     // region onRequestPermissionsResult() =========================================================
     // Execution begins here only after returning from a call to 'requestPermissions()' in the onClick()
     // if execution continues here, then we know that we did not have the permissions needed to take
@@ -148,7 +160,7 @@ public class camera extends AppCompatActivity implements View.OnClickListener
     }// endregion createImageFile() ================================================================
 
 
-    //region onActivityResult() ====================================================================
+    //region onActivityResult() ====================================================================s
     // Once the image has been captured and accepted, then program execution resumes here
     // This is where we finally can do whatever it is that we want to with the picture since we will
     // have it as a Bitmap variable.
@@ -160,7 +172,25 @@ public class camera extends AppCompatActivity implements View.OnClickListener
         {
             // this portion is where you do what you want with the image you just took
             Bitmap picture = BitmapFactory.decodeFile(currentPhotoPath);
-            imageView.setImageBitmap(picture);
+            imgV_picture.setImageBitmap(picture);
         }
     }// endregion onActivityResult() ===============================================================
+    // endregion camera shit
+
+    // region addExercise() ========================================================================
+    private void addExercise()
+    {
+        // create the EditText & set the properties
+        EditText exerciseEntry = new EditText(camera.this);
+        exerciseEntry.setId(View.generateViewId());
+        exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        exerciseEntry.setSingleLine(false);
+        LinearLayout.LayoutParams llp_edittext = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        exerciseEntry.setLayoutParams(llp_edittext);
+
+        // add the view to the layout
+        scrollViewLinearLayout.addView(exerciseEntry);
+    }// endregion addExercise() =====================================================================
 } // endregion camera class ==================================================================

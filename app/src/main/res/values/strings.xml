@@ -47,4 +47,12 @@
     <string name="camera">CAMERA</string>
     <string name="takePicture">Take Picture</string>
     <string name="todo">todo</string>
+    <string name="todo_2">TODO</string>
+    <string name="workoutName">Workout Name</string>
+    <string name="workoutDate">Workout Date</string>
+    <string name="workoutTime">Workout Time</string>
+    <string name="workoutDuration">Workout Duration</string>
+    <string name="userWeight">Your Weight</string>
+    <string name="addExercise">+ ADD EXERCISE</string>
+    <string name="save">Save</string>
 </resources>

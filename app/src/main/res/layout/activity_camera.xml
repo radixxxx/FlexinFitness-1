@@ -8,28 +8,188 @@
     tools:context=".camera">
 
 
-    <Button
-        android:id="@+id/btn_takePicture"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/outerConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/takePicture"
+        android:layout_height="200dp"
+
 
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/leftLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rightLayout"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgV_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toTopOf="@id/btn_takePicture"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_weight="1"
+
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <Button
+                android:id="@+id/btn_takePicture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/takePicture"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgV_picture" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rightLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/leftLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/txtV_workoutName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/workoutName"
+                android:inputType="text"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toTopOf="@id/txtV_workoutDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_weight="1" />
+
+            <EditText
+                android:id="@+id/txtV_workoutDate"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/workoutDate"
+                android:inputType="date"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toTopOf="@id/txtV_workoutTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtV_workoutName"
+                app:layout_constraintVertical_weight="1" />
+
+            <EditText
+                android:id="@+id/txtV_workoutTime"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/workoutTime"
+                android:inputType="time"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toTopOf="@id/txtV_workoutDuration"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtV_workoutDate"
+                app:layout_constraintVertical_weight="1" />
+
+            <EditText
+                android:id="@+id/txtV_workoutDuration"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/workoutDuration"
+                android:inputType="numberDecimal"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toTopOf="@id/txtV_userWeight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtV_workoutTime"
+                app:layout_constraintVertical_weight="1" />
+
+            <EditText
+                android:id="@+id/txtV_userWeight"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/userWeight"
+                android:inputType="numberDecimal"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtV_workoutDuration"
+                app:layout_constraintVertical_weight="1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        app:layout_constraintVertical_bias=".8"/>
+        <LinearLayout
+            android:id="@+id/scrollViewLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
-    <ImageView
-        android:id="@+id/imgV_pictureTaken"
+    <Button
+        android:id="@+id/btn_save"
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
 
-        android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toTopOf="@id/btn_takePicture"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/outerConstraintLayout"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_addExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addExercise"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/outerConstraintLayout"
+        app:layout_constraintBottom_toTopOf="@id/scrollView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
