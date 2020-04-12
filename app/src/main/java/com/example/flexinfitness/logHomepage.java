@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -12,41 +14,50 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-//start logHomepage class ==========================================================================
-public class log extends AppCompatActivity implements View.OnClickListener
+// region logHomepage class ========================================================================
+public class logHomepage extends AppCompatActivity implements View.OnClickListener
 {
-    // Declare View & ViewGroup variables
+    // region Views & ViewGroups
     Button addLogButton;
     Button homeButton;
     LinearLayout linearLayout;
     ConstraintLayout constraintLayout;
+    // endregion
 
-    // data member variable
+    // region DATA
     String str_workoutName;
     String str_date;
     String str_startTime;
     String str_duration;
     String str_bodyweight;
-
+    String currentPhotoPath;
+    Bitmap picture;
+    byte[] byteArray;
+    String[] editTextData = new String[40];
+    // endregion
 
     public static final int REQUEST_CODE = 1;
 
-    // start onCreate() ============================================================================
+    // region onCreate() ===========================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
-        connectViews();
+        // region connect & set onClicks()
+        constraintLayout = findViewById(R.id.constraintLayout);
+        linearLayout = findViewById(R.id.linearLayout);
+        addLogButton = findViewById(R.id.addLogButton);
+        homeButton = findViewById(R.id.homeButton);
 
-        // setting the onClick's for the buttons
         addLogButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
-    } // end onCreate() ============================================================================
+        // endregion
+    } // endregion onCreate() ======================================================================
 
 
-    // start onClick() =============================================================================
+    // region onClick() ============================================================================
     @Override
     public void onClick(View view)
     {
@@ -54,7 +65,7 @@ public class log extends AppCompatActivity implements View.OnClickListener
         {
             // create a log entry
             case R.id.addLogButton:
-                Intent createLogEntry = new Intent(getApplicationContext(), createLogEntry.class); // intent is to switch to 'createLogEntry'
+                Intent createLogEntry = new Intent(this, camera.class); // intent is to switch to 'camera'
                 startActivityForResult(createLogEntry, REQUEST_CODE);
                 break;
             // go back to dashboard
@@ -62,39 +73,50 @@ public class log extends AppCompatActivity implements View.OnClickListener
                 Intent goBackToDashboard = new Intent(getApplicationContext(), DashBoard.class);
                 startActivity(goBackToDashboard);
                 break;
-        } // end switch(view.getId()
-    } // end onClick() =============================================================================
+        }
+    } // endregion onClick() =======================================================================
 
 
-    // start onActivityResult() ====================================================================
-    // program flow comes back from 'createLogEntry' class just after packing up the bundle
+    // region onActivityResult() ===================================================================
+    // program flow comes back from 'camera' class just after packing up the bundle
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
         if (REQUEST_CODE == requestCode && resultCode == RESULT_OK)
         {
-            extractDataFromBundle(data);
-            System.out.println("made it to onAcitivityResult");
+            if(null != data)
+            {
+                // region extracting data from bundle
+                str_workoutName = data.getExtras().getString("WORKOUT_NAME");
+                str_date = data.getExtras().getString("WORKOUT_DATE");
+                str_startTime = data.getExtras().getString("START_TIME");
+                str_duration = data.getExtras().getString("DURATION");
+                str_bodyweight = data.getExtras().getString("BODY_WEIGHT");
+                currentPhotoPath = data.getExtras().getString("picturePath");
+                editTextData = data.getExtras().getStringArray("data");
 
+                str_workoutName = str_workoutName.toUpperCase();
+            }
             if (null != str_date && null != str_workoutName && null != str_startTime && null != str_duration && null != str_bodyweight)
             {
-                System.out.println("if statement");
                 addLog(str_workoutName, str_date, str_startTime, str_duration, str_bodyweight);
             } else
             {
                 System.out.println("else statement");
             }
         }
-    } // end onActivityResult() ====================================================================
+    } // endregion onActivityResult() ==============================================================
 
-    // start addLog() ==============================================================================
+
+    // region addLog() =============================================================================
     public void addLog(final String str_workoutName, final String str_workoutDate, final String str_startTime, final String str_duration, final String str_bodyweight)
     {
         // create a TextView and add it to the layout
         TextView logEntry = createView();
         linearLayout.addView(logEntry);
 
+        // sets the onClickListener to the newly created log entry within 'logHomepage'
         logEntry.setOnClickListener(new View.OnClickListener()
         {
             /* onClick for the new TextView that was defined, assigned workout values, and placed into the layout programmatically
@@ -110,45 +132,26 @@ public class log extends AppCompatActivity implements View.OnClickListener
                 workoutData.putString("START_TIME", str_startTime);
                 workoutData.putString("DURATION", str_duration);
                 workoutData.putString("BODYWEIGHT", str_bodyweight);
+                workoutData.putString("picturePath", currentPhotoPath);
 
-                Intent goToLogProof = new Intent(getApplicationContext(), log_proof.class);
+
+                Intent goToLogProof = new Intent(logHomepage.this, log_proof.class);
+                goToLogProof.putExtra("data", editTextData);
                 goToLogProof.putExtras(workoutData);
                 startActivity(goToLogProof);
             }
         });
-    } // end addLog() ==============================================================================
+    } // endregion addLog() ========================================================================
 
-    // start connectViews() ========================================================================
-    public void connectViews()
-    {
-        // Connect View & ViewGroup variables to their XML id's
-        constraintLayout = findViewById(R.id.constraintLayout);
-        linearLayout = findViewById(R.id.linearLayout);
-        addLogButton = findViewById(R.id.addLogButton);
-        homeButton = findViewById(R.id.homeButton);
 
-    } // end connectViews() ====================================================================
-
-    // start extractDataFromBundle() ===============================================================
-    public void extractDataFromBundle(Intent data)
-    {
-        str_workoutName = data.getExtras().getString("WORKOUT_NAME");
-        str_date = data.getExtras().getString("WORKOUT_DATE");
-        str_startTime = data.getExtras().getString("START_TIME");
-        str_duration = data.getExtras().getString("DURATION");
-        str_bodyweight = data.getExtras().getString("BODY_WEIGHT");
-
-        str_workoutName = str_workoutName.toUpperCase();
-    } // end extractDataFromBundle() ===============================================================
-
-    // start createView() ==========================================================================
+    // region createView() =========================================================================
     public TextView createView()
     {
-        TextView logEntry = new TextView(log.this);                         // creating the log entry
+        TextView logEntry = new TextView(logHomepage.this);        // creating the log entry
         logEntry.setId(View.generateViewId());
         logEntry.setText(str_workoutName + "      " + str_date);
         logEntry.setTextColor(Color.BLACK);
-        logEntry.setTextSize(25);
+        logEntry.setTextSize(35);
         logEntry.setBackgroundColor(Color.LTGRAY);
 
 
@@ -159,5 +162,5 @@ public class log extends AppCompatActivity implements View.OnClickListener
         logEntry.setLayoutParams(llp_textView);
 
         return logEntry;
-    } // end createView() ==========================================================================
-} // end logDiaryHomepage class ====================================================================
+    } // endregion createView() ====================================================================
+} // endregion logDiaryHomepage class ====================================================================

@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -43,6 +44,7 @@ public class camera extends AppCompatActivity implements View.OnClickListener
 
     // region DATA
     Bitmap  currentPicture;
+    String  currentPhotoPath;
     String  name = "example";
     String  date = "example";
     String  time = "example";
@@ -51,8 +53,8 @@ public class camera extends AppCompatActivity implements View.OnClickListener
     Vector<String> data = new Vector<>();
     // endregion DATA
 
+
     // region Views & ViewGroups
-    String currentPhotoPath;
     Button btn_takePicture;
     Button btn_addExercise;
     Button btn_save;
@@ -105,25 +107,59 @@ public class camera extends AppCompatActivity implements View.OnClickListener
         {
             case R.id.btn_takePicture:
                 // if we don't have permission to write to storage, request it
-                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)  !=  PackageManager.PERMISSION_GRANTED)
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
                 {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CAMERA_CODE);
-                }
-                else
+                } else
                     // permissions already granted, so take the picture
                     takePicture();
                 break;
             case R.id.btn_addExercise:
-                    addExercise();
+                addExercise();
                 break;
             case R.id.btn_save:
                 getWorkoutData();
                 getEditTextData();
+
+                //prepare bundle of workout data
+                Bundle workoutData = new Bundle();
+                workoutData.putString("WORKOUT_NAME", name);
+                workoutData.putString("WORKOUT_DATE", date);
+                workoutData.putString("START_TIME", time);
+                workoutData.putString("DURATION", duration);
+                workoutData.putString("BODY_WEIGHT", weight);
+                workoutData.putString("picturePath", currentPhotoPath);
+
+                // converting the vector into an String[] - string array so that I can pass all of
+                // of the information back to the activity
+                String[] data_v2 = new String[40];
+                for (int index=0;index < data.size(); ++index)
+                {
+                    data_v2[index] = data.get(index);
+                }
+
+                // declare intent and put the bundle in it
+                Intent backToLogHomepage = new Intent(getApplicationContext(), logHomepage.class);
+                backToLogHomepage.putExtra("data", data_v2);
+                backToLogHomepage.putExtras(workoutData);
+
+                // region Toast
+                Context context = this;
+                CharSequence text = "Just before I'm about to extract the picture from the bundle of workout data";
+                int toastDuration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, toastDuration);
+                toast.show();
+
+                // set result & finish
+                setResult(RESULT_OK, backToLogHomepage);
+                finish();
                 break;
             default:
                 break;
         }
     }// endregion onClick() ========================================================================
+
 
     // region camera shit
     // region onRequestPermissionsResult() =========================================================
@@ -181,7 +217,7 @@ public class camera extends AppCompatActivity implements View.OnClickListener
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
+                ".png",         /* suffix */
                 storageDir      /* directory */
         );
 

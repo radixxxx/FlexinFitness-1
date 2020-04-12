@@ -101,7 +101,7 @@ public class createLogEntry extends AppCompatActivity implements View.OnClickLis
                     workoutData.putString("BODY_WEIGHT", str_bodyweight);
 
                     // declare intent and put the bundle in it
-                    Intent backToLogHomepage = new Intent(this, log.class);
+                    Intent backToLogHomepage = new Intent(this, logHomepage.class);
                     backToLogHomepage.putExtras(workoutData);
 
                     // set result & finish

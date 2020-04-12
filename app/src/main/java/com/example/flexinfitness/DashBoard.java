@@ -122,7 +122,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         {
                 // switch to log
             case R.id.btn_log:
-                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), log.class);
+                Intent gotoLOGDIARYHOMEPAGE = new Intent(getApplicationContext(), logHomepage.class);
                 startActivity(gotoLOGDIARYHOMEPAGE);
                 break;
                 // switch to workout planner

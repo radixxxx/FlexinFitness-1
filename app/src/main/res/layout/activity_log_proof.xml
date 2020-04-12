@@ -2,187 +2,162 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".log_proof">
 
-    <Button
-        android:id="@+id/addExerciseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="316dp"
-        android:text="Add Exercise"
-        android:visibility="gone"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/outerConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.407" />
+        app:layout_constraintVertical_bias=".1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/leftLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rightLayout"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgV_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rightLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/leftLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/txtV_workoutName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/workoutName"
+                android:inputType="text"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toTopOf="@id/txtV_workoutDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_weight="1" />
+
+            <EditText
+                android:id="@+id/txtV_workoutDate"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/workoutDate"
+                android:inputType="date"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toTopOf="@id/txtV_workoutTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtV_workoutName"
+                app:layout_constraintVertical_weight="1" />
+
+            <EditText
+                android:id="@+id/txtV_workoutTime"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/workoutTime"
+                android:inputType="text"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toTopOf="@id/txtV_workoutDuration"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtV_workoutDate"
+                app:layout_constraintVertical_weight="1" />
+
+            <EditText
+                android:id="@+id/txtV_workoutDuration"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/workoutDuration"
+                android:inputType="text"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toTopOf="@id/txtV_userWeight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtV_workoutTime"
+                app:layout_constraintVertical_weight="1" />
+
+            <EditText
+                android:id="@+id/txtV_userWeight"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@null"
+                android:hint="@string/userWeight"
+                android:inputType="text"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtV_workoutDuration"
+                app:layout_constraintVertical_weight="1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="418dp"
-        android:layout_height="342dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:id="@+id/fuckLinearLayout"
+            android:id="@+id/scrollViewLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:orientation="vertical" />
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18"
-        tools:layout_editor_absoluteX="0dp">
-
-        <LinearLayout
-            android:id="@+id/leftLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/leftWorkoutNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WORKOUT NAME"
-                android:textColor="#000000"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/leftDateTextView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DATE"
-                android:textColor="#000000"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/leftStartTimeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="START TIME"
-                android:textColor="#000000"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/leftDurationTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DURATION(mins)"
-                android:textColor="#000000"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/leftBodyWeightTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BODY WEIGHT(lbs)"
-                android:textColor="#000000"
-                android:textSize="20dp" />
-        </LinearLayout>
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <LinearLayout
-            android:id="@+id/rightLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/rightWorkoutNameTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/rightDateTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/rightStartTimeTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/rightDurationTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/rightBodyWeightTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:visibility="visible" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/heading_txtV"
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:layout_height="48dp"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:textSize="30dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028" />
-
-    <Button
-        android:id="@+id/submitValuesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="276dp"
-        android:text="SUBMIT VALUES"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.404"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

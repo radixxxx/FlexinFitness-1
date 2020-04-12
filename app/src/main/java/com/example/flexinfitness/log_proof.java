@@ -3,41 +3,68 @@ package com.example.flexinfitness;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 // start log_proof class ===========================================================================
 public class log_proof extends AppCompatActivity
 {
-    // declaring Views & ViewGroups
-    TextView workoutName_txtV;
-    TextView date_txtV;
-    TextView startTime_txtV;
-    TextView duration_txtV;
-    TextView bodyweight_txtV;
-    TextView heading_txtV;
+    // region Views & ViewGroups
+    EditText    edtxt_workoutName;
+    EditText    edtxt_workoutDate;
+    EditText    edtxt_workoutTime;
+    EditText    edtxt_workoutDuration;
+    EditText    edtxt_userWeight;
 
-    String str_workoutName;
-    String str_workoutDate;
-    String str_duration;
-    String str_startTime;
-    String str_bodyWeight;
+    LinearLayout scrollViewLinearLayout;
+    ImageView   imgV_picture;
+    // endregion
 
-    // start onCreate() ============================================================================
+
+    // region DATA
+    String workoutName;
+    String workoutDate;
+    String workoutTime;
+    String workoutDuration;
+    String userWeight;
+
+    Bitmap picture;
+    String currentPhotoPath;
+    String[] editTextdata = new String[40];
+    // endregion DATA
+
+
+    // region onCreate() ===========================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_proof);
 
-        connectViews();
-        getWorkoutData();
-        setWorkoutData();
-    } // end onCreate() ============================================================================
+        // region connecting views
+        edtxt_workoutName = findViewById(R.id.txtV_workoutName);
+        edtxt_workoutDate = findViewById(R.id.txtV_workoutDate);
+        edtxt_workoutTime = findViewById(R.id.txtV_workoutTime);
+        edtxt_workoutDuration = findViewById(R.id.txtV_workoutDuration);
+        edtxt_userWeight = findViewById(R.id.txtV_userWeight);
 
-    // start getWorkoutInformation() ===============================================================
+        scrollViewLinearLayout = findViewById(R.id.scrollViewLinearLayout);
+        imgV_picture = findViewById(R.id.imgV_picture);
+        // endregion
+
+        getWorkoutData();
+        createAndSetEditTexts();
+        setWorkoutData();
+    } // endregion onCreate() ======================================================================
+
+
+    // region getWorkoutData() =====================================================================
     public void getWorkoutData()
     {
         /* in order to get the bundle of information that we passed from 'log', after clicking the newly
@@ -46,33 +73,51 @@ public class log_proof extends AppCompatActivity
         Intent workoutData;
         workoutData = getIntent();
 
-        str_workoutName = workoutData.getExtras().getString("WORKOUT_NAME");
-        str_workoutDate = workoutData.getExtras().getString("WORKOUT_DATE");
-        str_duration  = workoutData.getExtras().getString("DURATION");
-        str_startTime  = workoutData.getExtras().getString("START_TIME");
-        str_bodyWeight = workoutData.getExtras().getString("BODYWEIGHT");
-    } // end getWorkoutInformation() ===============================================================
+        workoutName = workoutData.getExtras().getString("WORKOUT_NAME");
+        workoutDate = workoutData.getExtras().getString("WORKOUT_DATE");
+        workoutDuration  = workoutData.getExtras().getString("DURATION");
+        workoutTime = workoutData.getExtras().getString("START_TIME");
+        userWeight = workoutData.getExtras().getString("BODYWEIGHT");
+        currentPhotoPath = workoutData.getExtras().getString("picturePath");
+        editTextdata = workoutData.getStringArrayExtra("data");
 
-    // start setWorkoutData() ======================================================================
+        picture = BitmapFactory.decodeFile(currentPhotoPath);
+    } // endregion getWorkoutData() =========================================================
+
+
+    // region setWorkoutData() =====================================================================
     public void setWorkoutData()
     {
-        workoutName_txtV.setText(str_workoutName);
-        date_txtV.setText(str_workoutDate);
-        duration_txtV.setText(str_duration);
-        startTime_txtV.setText(str_startTime);
-        bodyweight_txtV.setText(str_bodyWeight);
-        heading_txtV.setText(str_workoutName);
-    } // end setWorkoutData() ======================================================================
+        edtxt_workoutName.setText(workoutName);
+        edtxt_workoutDate.setText(workoutDate);
+        edtxt_workoutTime.setText(workoutTime);
+        edtxt_workoutDuration.setText(workoutDuration);
+        edtxt_userWeight.setText(userWeight);
 
-    // start connectViews() ========================================================================
-    public void connectViews()
+        imgV_picture.setImageBitmap(picture);
+    } // endregion setWorkoutData() ================================================================
+
+
+    // region createEditTexts() ====================================================================
+    public void createAndSetEditTexts()
     {
-        // connecting View & ViewGroups
-        workoutName_txtV = findViewById(R.id.rightWorkoutNameTextView);
-        date_txtV = findViewById(R.id.rightDateTextView);
-        startTime_txtV = findViewById(R.id.rightStartTimeTextView);
-        duration_txtV = findViewById(R.id.rightDurationTextView);
-        bodyweight_txtV = findViewById(R.id.rightBodyWeightTextView);
-        heading_txtV = findViewById(R.id.heading_txtV);
-    } // end connectViews() ========================================================================
-} // end log_proof class
+        for(int index=0; (null !=(editTextdata[index])) ;++index)
+        {
+            // create the EditText & set the properties
+            EditText exerciseEntry = new EditText(log_proof.this);
+            exerciseEntry.setId(View.generateViewId());
+            exerciseEntry.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+            exerciseEntry.setSingleLine(false);
+            LinearLayout.LayoutParams llp_edittext = new
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            exerciseEntry.setLayoutParams(llp_edittext);
+
+            // add the view to the layout
+            scrollViewLinearLayout.addView(exerciseEntry);
+
+            exerciseEntry.setText(editTextdata[index]);
+        }
+    }
+    // endregion createEditTexts() =================================================================
+} // end log_proof class ===========================================================================
