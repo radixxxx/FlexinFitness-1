@@ -110,7 +110,7 @@
                 android:autoSizeTextType="uniform"
                 android:background="@null"
                 android:hint="@string/workoutTime"
-                android:inputType="time"
+                android:inputType="text"
                 android:gravity="center"
 
                 app:layout_constraintBottom_toTopOf="@id/txtV_workoutDuration"
@@ -127,7 +127,7 @@
                 android:autoSizeTextType="uniform"
                 android:background="@null"
                 android:hint="@string/workoutDuration"
-                android:inputType="numberDecimal"
+                android:inputType="text"
                 android:gravity="center"
 
                 app:layout_constraintBottom_toTopOf="@id/txtV_userWeight"
@@ -144,7 +144,7 @@
                 android:autoSizeTextType="uniform"
                 android:background="@null"
                 android:hint="@string/userWeight"
-                android:inputType="numberDecimal"
+                android:inputType="text"
                 android:gravity="center"
 
                 app:layout_constraintBottom_toBottomOf="parent"

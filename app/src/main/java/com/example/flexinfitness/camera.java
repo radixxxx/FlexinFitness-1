@@ -8,6 +8,7 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -30,6 +31,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
+import java.util.*;
 
 // region camera class =============================================================================
 public class camera extends AppCompatActivity implements View.OnClickListener
@@ -38,12 +41,29 @@ public class camera extends AppCompatActivity implements View.OnClickListener
     private static final int CAMERA_CAPTURE_CODE = 6;
     private static final int REQUEST_CAMERA_CODE = 7;
 
+    // region DATA
+    Bitmap  currentPicture;
+    String  name = "example";
+    String  date = "example";
+    String  time = "example";
+    String  duration = "example";
+    String  weight = "example";
+    Vector<String> data = new Vector<>();
+    // endregion DATA
+
     // region Views & ViewGroups
     String currentPhotoPath;
     Button btn_takePicture;
     Button btn_addExercise;
+    Button btn_save;
     ImageView imgV_picture;
     LinearLayout scrollViewLinearLayout;
+
+    EditText    edtxt_name;
+    EditText    edtxt_date;
+    EditText    edtxt_time;
+    EditText    edtxt_duration;
+    EditText    edtxt_weight;
     // endregion
 
 
@@ -57,12 +77,20 @@ public class camera extends AppCompatActivity implements View.OnClickListener
         // region connect & set onClicks()
         // connect views
         btn_takePicture = findViewById(R.id.btn_takePicture);
+        btn_save = findViewById(R.id.btn_save);
         imgV_picture = findViewById(R.id.imgV_picture);
         btn_addExercise = findViewById(R.id.btn_addExercise);
         scrollViewLinearLayout = findViewById(R.id.scrollViewLinearLayout);
+
+        edtxt_name = findViewById(R.id.txtV_workoutName);
+        edtxt_date = findViewById(R.id.txtV_workoutDate);
+        edtxt_time = findViewById(R.id.txtV_workoutTime);
+        edtxt_duration = findViewById(R.id.txtV_workoutDuration);
+        edtxt_weight = findViewById(R.id.txtV_userWeight);
         // set onClick()
         btn_takePicture.setOnClickListener(this);
         btn_addExercise.setOnClickListener(this);
+        btn_save.setOnClickListener(this);
         // endregion connect & set onClicks()
     } // endregion onCreate() ======================================================================
 
@@ -88,7 +116,10 @@ public class camera extends AppCompatActivity implements View.OnClickListener
             case R.id.btn_addExercise:
                     addExercise();
                 break;
-
+            case R.id.btn_save:
+                getWorkoutData();
+                getEditTextData();
+                break;
             default:
                 break;
         }
@@ -160,7 +191,7 @@ public class camera extends AppCompatActivity implements View.OnClickListener
     }// endregion createImageFile() ================================================================
 
 
-    //region onActivityResult() ====================================================================s
+    //region onActivityResult() ====================================================================
     // Once the image has been captured and accepted, then program execution resumes here
     // This is where we finally can do whatever it is that we want to with the picture since we will
     // have it as a Bitmap variable.
@@ -171,11 +202,56 @@ public class camera extends AppCompatActivity implements View.OnClickListener
         if (requestCode == CAMERA_CAPTURE_CODE && resultCode == RESULT_OK)
         {
             // this portion is where you do what you want with the image you just took
-            Bitmap picture = BitmapFactory.decodeFile(currentPhotoPath);
-            imgV_picture.setImageBitmap(picture);
+            currentPicture = BitmapFactory.decodeFile(currentPhotoPath);
+            imgV_picture.setImageBitmap(currentPicture);
         }
     }// endregion onActivityResult() ===============================================================
     // endregion camera shit
+
+
+    // region getWorkoutData() =====================================================================
+    public void getWorkoutData()
+    {
+        /*
+        // region Toast
+        Context context = this;
+        CharSequence text = "getWorkoutData()";
+        int toastDuration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, toastDuration);
+        toast.show();
+        // endregion Toast
+         */
+
+        name = edtxt_name.getText().toString();
+        date = edtxt_date.getText().toString();
+        time = edtxt_time.getText().toString();
+        duration = edtxt_duration.getText().toString();
+        weight = edtxt_weight.getText().toString();
+    }// endregion getWorkoutData() =================================================================
+
+
+    // region getEditTextData() ====================================================================
+    public void getEditTextData()
+    {   // index through the linearLayout
+        for(int index=0;index < scrollViewLinearLayout.getChildCount();++index)
+        {   // if the ViewGroup not empty
+            if(null != scrollViewLinearLayout.getChildAt(index))
+            {   // then, get the first child
+                View tempView = scrollViewLinearLayout.getChildAt(index);
+                if(tempView instanceof EditText)
+                {
+                    EditText edtxt_temp = (EditText) tempView;
+                    if(edtxt_temp != null)
+                    {
+                        data.add("adding this so that the vector isn't empty when I try to assign the first element in the next line something. It would crash otherwise.");
+                        data.set(index, edtxt_temp.getText().toString());
+                    }
+                }
+            }
+        }
+    }// endregion getEditTextData() ================================================================
+
 
     // region addExercise() ========================================================================
     private void addExercise()
@@ -192,5 +268,5 @@ public class camera extends AppCompatActivity implements View.OnClickListener
 
         // add the view to the layout
         scrollViewLinearLayout.addView(exerciseEntry);
-    }// endregion addExercise() =====================================================================
+    }// endregion addExercise() ====================================================================
 } // endregion camera class ==================================================================
