@@ -27,7 +27,6 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     Button btn_settings;
     Button btn_workoutPlanner;
     Button btn_tutorials;
-    Button btn_camera;
 
     TextView txtV_name;
     // endregion Views/ViewGroups/Variables
@@ -50,14 +49,12 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         btn_settings = findViewById(R.id.btn_settings);
         btn_workoutPlanner = findViewById(R.id.btn_workoutPlanner);
         btn_tutorials = findViewById(R.id.btn_tutorials);
-        btn_camera = findViewById(R.id.btn_camera);
 
         // set the onClicks
         btn_log.setOnClickListener(this);
         btn_settings.setOnClickListener(this);
         btn_workoutPlanner.setOnClickListener(this);
         btn_tutorials.setOnClickListener(this);
-        btn_camera.setOnClickListener(this);
         // endregion connect & set onClicks()
 
         final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
@@ -139,11 +136,6 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             case R.id.btn_settings:
                 Intent goToSettings = new Intent(getApplicationContext(), settingOptions.class);
                 startActivity(goToSettings);
-                break;
-                // switch to camera
-            case R.id.btn_camera:
-                Intent goToCamera = new Intent(DashBoard.this, camera.class);
-                startActivity(goToCamera);
                 break;
             default:
                 break;
